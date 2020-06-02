@@ -1,0 +1,26 @@
+{
+  "name": "create-mern-application",
+  "version": "0.0.0",
+  "description": "A bootstrapper for creating a MERN application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexlee-dev/create-mern-application.git"
+  },
+  "keywords": [
+    "mern",
+    "bootstrapper",
+    "cli",
+    "tool",
+    "cra"
+  ],
+  "author": "Alex Lee (www.alexlee.dev)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexlee-dev/create-mern-application/issues"
+  },
+  "homepage": "https://github.com/alexlee-dev/create-mern-application#readme"
+}

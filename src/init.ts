@@ -49,9 +49,10 @@ export const createProjectDirectory = async (
   };
 
   const jsScripts = {
-    build: "rimraf dist && webpack",
+    build:
+      "rimraf dist && webpack && rimraf build && babel src/server --out-dir build",
     dev: "env-cmd -e development npm run spinup",
-    spinup: "node src/server/index.js",
+    spinup: "node build/index.js",
     start: "start-server-and-test dev http://localhost:3000 webpack-dev-server",
     test: "start-server-and-test test-server http://localhost:3000 cy:run",
     "test-gui":

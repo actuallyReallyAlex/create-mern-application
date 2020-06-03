@@ -16,9 +16,10 @@ export const dependencies = [
 export const devDependencies = [
   "@babel/core",
   "@babel/cli",
+  "@babel/plugin-transform-runtime",
   "@babel/preset-env",
   "@babel/preset-react",
-  // "@babel/runtime",
+  "@babel/runtime",
   "@svgr/webpack",
   "babel-loader",
   "clean-webpack-plugin",

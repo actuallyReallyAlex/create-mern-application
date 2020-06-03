@@ -36,11 +36,9 @@ export const createProjectDirectory = async (
 
   const tsScripts = {
     build: "npm run build-client && npm run build-server",
-    "build-prod":
-      "env-cmd -e production npm run build-client && npm run build-server",
     "build-client": "rimraf dist && webpack",
     "build-server":
-      "rimraf build && babel src/server --out-dir build && copyfiles -f src/server/assets/**/* build/assets",
+      "rimraf build && tsc && copyfiles -f src/server/assets/**/* build/assets",
     dev: "env-cmd -e development npm run spinup",
     spinup: "node build/index.js",
     start: "start-server-and-test dev http://localhost:3000 webpack-dev-server",

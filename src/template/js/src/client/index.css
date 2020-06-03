@@ -1,0 +1,17 @@
+body {
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+  margin: 0;
+}
+
+#app {
+  align-items: center;
+  color: #0e0e0e;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+#logo {
+  height: 300px;
+}

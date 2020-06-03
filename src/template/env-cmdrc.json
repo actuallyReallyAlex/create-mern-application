@@ -1,0 +1,14 @@
+{
+  "production": {
+    "NODE_ENV": "production",
+    "PORT": 3000
+  },
+  "development": {
+    "NODE_ENV": "development",
+    "PORT": 3000
+  },
+  "test": {
+    "NODE_ENV": "test",
+    "PORT": 3000
+  }
+}

@@ -30,5 +30,9 @@
   "bugs": {
     "url": "https://github.com/alexlee-dev/create-mern-application/issues"
   },
-  "homepage": "https://github.com/alexlee-dev/create-mern-application#readme"
+  "homepage": "https://github.com/alexlee-dev/create-mern-application#readme",
+  "devDependencies": {
+    "copyfiles": "^2.3.0",
+    "typescript": "^3.9.3"
+  }
 }

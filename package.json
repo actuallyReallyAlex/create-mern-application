@@ -1,9 +1,17 @@
 {
   "name": "create-mern-application",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "A bootstrapper for creating a MERN application.",
+  "bin": {
+    "create-mern-application": "./index.js"
+  },
   "main": "index.js",
+  "files": [
+    "build"
+  ],
   "scripts": {
+    "build": "rimraf build && tsc && copyfiles -u 1 \"src/template/**/*\" build",
+    "start": "node build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,5 +30,26 @@
   "bugs": {
     "url": "https://github.com/alexlee-dev/create-mern-application/issues"
   },
-  "homepage": "https://github.com/alexlee-dev/create-mern-application#readme"
+  "homepage": "https://github.com/alexlee-dev/create-mern-application#readme",
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.1",
+    "@types/inquirer": "^6.5.0",
+    "@types/node": "^14.0.9",
+    "@types/semver": "^7.2.0",
+    "@types/update-notifier": "^4.1.0",
+    "@types/validate-npm-package-name": "^3.0.0",
+    "copyfiles": "^2.3.0",
+    "typescript": "^3.9.3"
+  },
+  "dependencies": {
+    "@sentry/node": "^5.16.0",
+    "chalk": "^4.0.0",
+    "commander": "^5.1.0",
+    "fs-extra": "^9.0.0",
+    "inquirer": "^7.1.0",
+    "ora": "^4.0.4",
+    "semver": "^7.3.2",
+    "update-notifier": "^4.1.0",
+    "validate-npm-package-name": "^3.0.0"
+  }
 }

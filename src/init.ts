@@ -222,6 +222,13 @@ export const copyTemplateFiles = async (
       },
     ];
 
+    if (language === "ts") {
+      requiredFilesToCopy.push({
+        src: path.join(__dirname, `template/ts/index.d.ts`),
+        dest: path.join(root, "/index.d.ts"),
+      });
+    }
+
     // * Copy Template Files
     await Promise.all(
       requiredFilesToCopy.map(

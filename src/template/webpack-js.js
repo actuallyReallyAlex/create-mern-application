@@ -15,9 +15,12 @@ console.log(
   `Project Version === ${chalk.yellowBright(process.env.npm_package_version)}`
 );
 
+console.log("");
+
 module.exports = {
   mode: webpackMode,
   devServer: {
+    clientLogLevel: "error",
     contentBase: path.join(__dirname, "public"),
     historyApiFallback: true,
     open: true,

@@ -1,6 +1,6 @@
 {
-  "name": "create-cli-application",
-  "short_name": "create-cli-application",
+  "name": "create-mern-application",
+  "short_name": "create-mern-application",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -13,7 +13,7 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#000000",
-  "background_color": "#000000",
+  "theme_color": "#0e0e0e",
+  "background_color": "#0e0e0e",
   "display": "standalone"
 }

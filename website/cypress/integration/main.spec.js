@@ -1,17 +1,17 @@
 /// <reference types="cypress" />
 
-context('create-cli-application', () => {
+context('create-mern-application', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000');
   });
 
   it('Should display correct content', () => {
-    cy.get('body').should('contain.text', 'create-cli-application');
+    cy.get('body').should('contain.text', 'create-mern-application');
     cy.get('body').should(
       'contain.text',
-      'A bootstrapper for creating a cli application with Node.',
+      'A bootstrapper for creating a MERN application.',
     );
-    cy.get('body').should('contain.text', '15.6kb gzipped');
+    cy.get('body').should('contain.text', '21.8kb gzipped');
     cy.get('body').should('contain.text', 'View Documentation');
   });
 

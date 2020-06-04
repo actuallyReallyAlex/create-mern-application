@@ -25,6 +25,8 @@
 
 ### Starting Program
 
+Please be sure to start your MongoDB instance prior to starting your application.
+
 `npm start`
 
 ## ⛏️ Built Using <a name = "built_using"></a>

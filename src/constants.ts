@@ -5,7 +5,9 @@ export const dependencies = [
   "chalk",
   "cors",
   "express",
+  "mongoose",
   "morgan",
+  "node-fetch",
   "react",
   "react-dom",
 ];

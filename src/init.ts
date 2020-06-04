@@ -273,12 +273,10 @@ export const replaceTemplateValues = async (
   try {
     spinner.start();
 
-    const jsFilesToRewrite = [path.join(root, "README.md")];
-    const tsFilesToRewrite = [path.join(root, "README.md")];
-
-    let replaceFiles = jsFilesToRewrite;
-
-    if (language === "ts") replaceFiles = tsFilesToRewrite;
+    const replaceFiles = [
+      path.join(root, "README.md"),
+      path.join(root, ".env-cmdrc.json"),
+    ];
 
     // * Apply real values to template files
     await Promise.all(
@@ -370,6 +368,11 @@ export const displaySuccessMessage = (applicationName: string): void => {
   console.log();
   console.log(chalk.blueBright(`  cd `) + chalk.blueBright(root));
   console.log(`  ${chalk.blueBright(`npm run build && npm start`)}`);
+  console.log();
+  console.log(
+    chalk.blueBright("NOTE") +
+      ": Please be sure to have your MongoDB instance running, prior to starting your application."
+  );
   console.log();
   console.log(chalk.blueBright("Happy creating!"));
 };

@@ -1,18 +1,17 @@
-import chalk from "chalk";
-import cors from "cors";
-import express, { Request, Response } from "express";
-import mongoose from "mongoose";
-import morgan from "morgan";
-import path from "path";
+import chalk from 'chalk';
+import cors from 'cors';
+import express, { Request, Response } from 'express';
+import morgan from 'morgan';
+import path from 'path';
 
-import { Controller } from "./types";
+import { Controller } from './types';
 
 class App {
   public app: express.Application;
 
-  public port: string;
+  public port: number | string;
 
-  constructor(controllers: Controller[], port: string) {
+  constructor(controllers: Controller[], port: number | string) {
     this.app = express();
     this.port = port;
 
@@ -21,18 +20,12 @@ class App {
   }
 
   private initializeMiddlewares(): void {
-    mongoose.connect(process.env.MONGODB_URL, {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-      useUnifiedTopology: true,
-    });
-
     this.app.use(express.json());
-    this.app.use(morgan("dev"));
+    this.app.use(morgan('dev'));
     const whitelistDomains = [
-      "http://localhost:3000",
-      "http://localhost:8080",
+      'http://localhost:3000',
+      'http://localhost:8080',
+      'http://192.168.1.228:3001', // * Browsersync
       undefined,
     ];
 
@@ -43,7 +36,7 @@ class App {
         } else {
           // eslint-disable-next-line no-console
           console.error(`Sever refused to allow: ${origin}`);
-          cb(new Error("Not allowed by CORS"));
+          cb(new Error('Not allowed by CORS'));
         }
       },
     };
@@ -53,13 +46,13 @@ class App {
 
   private initializeControllers(controllers: Controller[]): void {
     controllers.forEach((controller) => {
-      this.app.use("/", controller.router);
+      this.app.use('/', controller.router);
     });
 
-    this.app.use(express.static(path.join(__dirname, "../dist")));
+    this.app.use(express.static(path.join(__dirname, '../dist')));
 
-    this.app.get("*", (req: Request, res: Response) => {
-      res.sendFile(path.join(__dirname, "../dist/index.html"));
+    this.app.get('*', (req: Request, res: Response) => {
+      res.sendFile(path.join(__dirname, '../dist/index.html'));
     });
   }
 
@@ -69,7 +62,7 @@ class App {
       console.log(`Mode: ${chalk.yellowBright(process.env.NODE_ENV)}\n`);
       // eslint-disable-next-line no-console
       console.log(
-        `Server is listening on port: ${chalk.yellowBright(this.port)}\n`
+        `Server is listening on port: ${chalk.yellowBright(this.port)}\n`,
       );
     });
   }

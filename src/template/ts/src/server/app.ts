@@ -1,6 +1,7 @@
 import chalk from "chalk";
 import cors from "cors";
 import express, { Request, Response } from "express";
+import mongoose from "mongoose";
 import morgan from "morgan";
 import path from "path";
 
@@ -20,6 +21,13 @@ class App {
   }
 
   private initializeMiddlewares(): void {
+    mongoose.connect(process.env.MONGODB_URL, {
+      useNewUrlParser: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
+      useUnifiedTopology: true,
+    });
+
     this.app.use(express.json());
     this.app.use(morgan("dev"));
     const whitelistDomains = [

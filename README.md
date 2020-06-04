@@ -75,6 +75,12 @@ You can choose to use the application in an interactive mode by passing the flag
 
 This mode grants you several additinoal options.
 
+### Starting the Application
+
+Please be sure to have your MongoDB instance running prior to starting your application.
+
+`npm start`
+
 ## ⛏️ Built Using <a name = "built_using"></a>
 
 ## ✍️ Authors <a name = "authors"></a>

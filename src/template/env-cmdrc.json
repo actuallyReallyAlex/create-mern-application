@@ -1,13 +1,19 @@
 {
   "production": {
+    "APP_NAME": "___APP NAME___",
+    "MONGODB_URL": "mongodb://localhost:27017/___APP NAME___",
     "NODE_ENV": "production",
     "PORT": 3000
   },
   "development": {
+    "APP_NAME": "___APP NAME___",
+    "MONGODB_URL": "mongodb://localhost:27017/___APP NAME___",
     "NODE_ENV": "development",
     "PORT": 3000
   },
   "test": {
+    "APP_NAME": "___APP NAME___",
+    "MONGODB_URL": "mongodb://localhost:27017/___APP NAME___",
     "NODE_ENV": "test",
     "PORT": 3000
   }

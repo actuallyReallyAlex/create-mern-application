@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- [Website](https://create-mern-application.herokuapp.com/)
+- MongoDB support
+
 ### Changed
 
 ### Removed

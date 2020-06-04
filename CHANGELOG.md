@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Build commands are quieter - only displaying errors [#4](https://github.com/alexlee-dev/create-mern-application/issues/4)
+- Yellow chalk logs to Blue chalk logs [#5](https://github.com/alexlee-dev/create-mern-application/issues/5)
 
 ### Removed
 

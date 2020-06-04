@@ -9,10 +9,10 @@ const outputDirectory = 'dist';
 const webpackMode =
   process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
-console.log(`Webpack Mode === ${chalk.yellowBright(webpackMode)}\n`);
+console.log(`Webpack Mode === ${chalk.blueBright(webpackMode)}\n`);
 
 console.log(
-  `Project Version === ${chalk.yellowBright(process.env.npm_package_version)}`,
+  `Project Version === ${chalk.blueBright(process.env.npm_package_version)}`,
 );
 
 module.exports = {

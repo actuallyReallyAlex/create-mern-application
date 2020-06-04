@@ -11,7 +11,7 @@ context('create-mern-application', () => {
       'contain.text',
       'A bootstrapper for creating a MERN application.',
     );
-    cy.get('body').should('contain.text', '21.8kb gzipped');
+    cy.get('body').should('contain.text', '22.9kb gzipped');
     cy.get('body').should('contain.text', 'View Documentation');
   });
 

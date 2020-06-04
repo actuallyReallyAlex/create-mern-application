@@ -24,7 +24,7 @@ const Info: React.SFC<{}> = () => {
       </blockquote>
       <span className="badge margin-bottom-md">
         <FontAwesomeIcon icon={faBox} />
-        <span className="margin-left-sm">21.8kb gzipped</span>
+        <span className="margin-left-sm">22.9kb gzipped</span>
       </span>
       <a
         className="blue"

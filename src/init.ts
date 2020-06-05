@@ -278,6 +278,8 @@ export const replaceTemplateValues = async (
     const replaceFiles = [
       path.join(root, "README.md"),
       path.join(root, ".env-cmdrc.json"),
+      path.join(root, "/public/index.html"),
+      path.join(root, "/src/server/assets/site.webmanifest"),
     ];
 
     // * Apply real values to template files

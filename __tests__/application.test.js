@@ -34,7 +34,7 @@ describe("create-mern-application", () => {
         },
         {
           src: path.join(root, "/public/index.html"),
-          fileContentsSrc: path.join(templateBase, "/public/index.html"),
+          fileContentsSrc: path.join(__dirname, "./fixtures/index.html"),
         },
         {
           src: path.join(root, "README.md"),
@@ -43,6 +43,10 @@ describe("create-mern-application", () => {
         {
           src: path.join(root, "webpack.config.js"),
           fileContentsSrc: path.join(templateBase, "webpack-js.js"),
+        },
+        {
+          src: path.join(root, "/src/server/assets/site.webmanifest"),
+          fileContentsSrc: path.join(__dirname, "./fixtures/site.webmanifest"),
         },
       ];
 
@@ -104,7 +108,7 @@ describe("create-mern-application", () => {
         },
         {
           src: path.join(root, "/public/index.html"),
-          fileContentsSrc: path.join(templateBase, "/public/index.html"),
+          fileContentsSrc: path.join(__dirname, "./fixtures/index.html"),
         },
         {
           src: path.join(root, "README.md"),
@@ -117,6 +121,10 @@ describe("create-mern-application", () => {
         {
           src: path.join(root, "webpack.config.js"),
           fileContentsSrc: path.join(templateBase, "webpack-ts.js"),
+        },
+        {
+          src: path.join(root, "/src/server/assets/site.webmanifest"),
+          fileContentsSrc: path.join(__dirname, "./fixtures/site.webmanifest"),
         },
       ];
 

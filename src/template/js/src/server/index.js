@@ -2,6 +2,7 @@ import chalk from "chalk";
 
 import App from "./app";
 import AssetsController from "./controllers/assets";
+import BeerController from "./controllers/beer";
 import ScriptsController from "./controllers/scripts";
 import { checkIfMongoDBIsRunning } from "./util";
 
@@ -27,7 +28,7 @@ const main = async () => {
     }
 
     const app = new App(
-      [new AssetsController(), new ScriptsController()],
+      [new AssetsController(), new BeerController(), new ScriptsController()],
       process.env.PORT
     );
 

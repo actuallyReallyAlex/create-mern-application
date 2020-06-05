@@ -1,7 +1,6 @@
 import { starterBeers } from "../constants";
-import { Beer } from "../types";
 
-export const initializeStarterBeers = async (): Promise<void> => {
+export const initializeStarterBeers = async () => {
   try {
     starterBeers.forEach(async ({ abv, brewer, description, name, type }) => {
       await fetch("/beer", {
@@ -25,10 +24,10 @@ export const initializeStarterBeers = async (): Promise<void> => {
   }
 };
 
-export const getBeers = async (): Promise<Beer[]> => {
+export const getBeers = async () => {
   try {
     const response = await fetch("/beers");
-    const beers: Beer[] = await response.json();
+    const beers = await response.json();
     return beers;
   } catch (error) {
     console.error(error);

@@ -5,12 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.4.0] - _Unreleased_
+## [0.4.0] - 2020-06-04
+
+### 🧪 Testing
 
 ### Added
 
-- Tests
-- Favicon to Template
+- Tests [#6](https://github.com/alexlee-dev/create-mern-application/issues/6)
+- Favicon to Template [#11](https://github.com/alexlee-dev/create-mern-application/issues/11)
 
 ### Changed
 

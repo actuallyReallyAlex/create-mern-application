@@ -60,10 +60,10 @@ class App {
   listen() {
     this.app.listen(this.port, () => {
       // eslint-disable-next-line no-console
-      console.log(`Mode: ${chalk.yellowBright(process.env.NODE_ENV)}\n`);
+      console.log(`Mode: ${chalk.blueBright(process.env.NODE_ENV)}\n`);
       // eslint-disable-next-line no-console
       console.log(
-        `Server is listening on port: ${chalk.yellowBright(this.port)}\n`
+        `Server is listening on port: ${chalk.blueBright(this.port)}\n`
       );
     });
   }

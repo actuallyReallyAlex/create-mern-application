@@ -36,12 +36,13 @@ export const createProjectDirectory = async (
 
   const tsScripts = {
     build: "npm run build-client && npm run build-server",
-    "build-client": "rimraf dist && webpack",
+    "build-client": "rimraf dist && webpack --display=errors-only",
     "build-server":
       "rimraf build && tsc && copyfiles -f src/server/assets/**/* build/assets",
     dev: "env-cmd -e development npm run spinup",
     spinup: "node build/index.js",
-    start: "start-server-and-test dev http://localhost:3000 webpack-dev-server",
+    start:
+      "start-server-and-test dev http://localhost:3000 'webpack-dev-server --info=false'",
     test: "start-server-and-test test-server http://localhost:3000 cy:run",
     "test-gui":
       "start-server-and-test test-server http://localhost:3000 cy:open",
@@ -50,10 +51,11 @@ export const createProjectDirectory = async (
 
   const jsScripts = {
     build:
-      "rimraf dist && webpack && rimraf build && babel src/server --out-dir build",
+      "rimraf dist && webpack --display=errors-only && rimraf build && babel src/server --out-dir build",
     dev: "env-cmd -e development npm run spinup",
     spinup: "node build/index.js",
-    start: "start-server-and-test dev http://localhost:3000 webpack-dev-server",
+    start:
+      "start-server-and-test dev http://localhost:3000 'webpack-dev-server --info=false'",
     test: "start-server-and-test test-server http://localhost:3000 cy:run",
     "test-gui":
       "start-server-and-test test-server http://localhost:3000 cy:open",
@@ -276,6 +278,8 @@ export const replaceTemplateValues = async (
     const replaceFiles = [
       path.join(root, "README.md"),
       path.join(root, ".env-cmdrc.json"),
+      path.join(root, "/public/index.html"),
+      path.join(root, "/src/server/assets/site.webmanifest"),
     ];
 
     // * Apply real values to template files

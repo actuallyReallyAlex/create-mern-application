@@ -10,8 +10,40 @@ body {
   flex-direction: column;
   justify-content: center;
   min-height: 100vh;
+  padding: 25px;
 }
 
 #logo {
   height: 300px;
+}
+
+table {
+  border-collapse: collapse;
+  border-radius: 10px;
+  margin-top: 25px;
+  overflow: hidden;
+}
+
+table thead tr {
+  background-color: #39374d;
+  color: white;
+  height: 50px;
+}
+
+td,
+th {
+  padding: 8px;
+  text-align: left;
+}
+
+.column1 {
+  padding-left: 30px;
+}
+
+.column5 {
+  padding-right: 30px;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #e9ecef;
 }

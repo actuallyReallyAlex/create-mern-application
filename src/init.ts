@@ -282,6 +282,12 @@ export const replaceTemplateValues = async (
       path.join(root, "/src/server/assets/site.webmanifest"),
     ];
 
+    if (language === "js") {
+      replaceFiles.push(path.join(root, "/src/client/App.js"));
+    } else {
+      replaceFiles.push(path.join(root, "/src/client/App.tsx"));
+    }
+
     // * Apply real values to template files
     await Promise.all(
       valueReplacer(

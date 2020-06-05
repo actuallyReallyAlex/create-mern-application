@@ -5,7 +5,7 @@ const App = () => {
   return (
     <div id="app">
       <img alt="Logo" id="logo" src={logo} />
-      <h1>create-mern-application</h1>
+      <h1>___APP NAME___</h1>
       <p>
         Edit <code>src/client/App.tsx</code> and save to reload.
       </p>

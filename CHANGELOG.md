@@ -9,11 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Beers Database [#10](https://github.com/alexlee-dev/create-mern-application/issues/10)
+
 ### Changed
+
+- Add application name to `App.js` / `App.tsx`
 
 ### Removed
 
 ### Fixed
+
+- No assets being served by server
 
 ## [0.4.0] - 2020-06-04
 

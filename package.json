@@ -12,7 +12,7 @@
   "scripts": {
     "build": "rimraf build && tsc && copyfiles -u 1 \"src/template/**/*\" build",
     "start": "node build/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,8 @@
   },
   "homepage": "https://github.com/alexlee-dev/create-mern-application#readme",
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.10.1",
+    "@babel/preset-env": "^7.10.2",
     "@types/fs-extra": "^9.0.1",
     "@types/inquirer": "^6.5.0",
     "@types/node": "^14.0.9",
@@ -39,6 +41,7 @@
     "@types/update-notifier": "^4.1.0",
     "@types/validate-npm-package-name": "^3.0.0",
     "copyfiles": "^2.3.0",
+    "jest": "^26.0.1",
     "typescript": "^3.9.3"
   },
   "dependencies": {
@@ -51,5 +54,10 @@
     "semver": "^7.3.2",
     "update-notifier": "^4.1.0",
     "validate-npm-package-name": "^3.0.0"
+  },
+  "jest": {
+    "testMatch": [
+      "**/__tests__/**/*.test.js"
+    ]
   }
 }

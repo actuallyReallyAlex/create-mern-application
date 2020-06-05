@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Tests
+
 ### Changed
 
 - Build commands are quieter - only displaying errors [#4](https://github.com/alexlee-dev/create-mern-application/issues/4)

@@ -1,7 +1,12 @@
 import * as React from "react";
 import { addBeer } from "../../api/beer";
 
-const NewBeerForm = ({ refreshBeers, setIsModalOpen, setModalContent }) => {
+const NewBeerForm = ({
+  refreshBeers,
+  setIsLoading,
+  setIsModalOpen,
+  setModalContent,
+}) => {
   const [newBeerAbv, setNewBeerAbv] = React.useState(0.0);
   const [newBeerBrewer, setNewBeerBrewer] = React.useState("");
   const [newBeerDescription, setNewBeerDescription] = React.useState("");
@@ -14,6 +19,7 @@ const NewBeerForm = ({ refreshBeers, setIsModalOpen, setModalContent }) => {
       id="new-beer-form"
       onSubmit={async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         await addBeer({
           abv: newBeerAbv,
           brewer: newBeerBrewer,
@@ -21,9 +27,10 @@ const NewBeerForm = ({ refreshBeers, setIsModalOpen, setModalContent }) => {
           name: newBeerName,
           type: newBeerType,
         });
-        refreshBeers();
+        await refreshBeers();
         setIsModalOpen(false);
         setModalContent(null);
+        setIsLoading(false);
       }}
     >
       <h3>Add New Beer</h3>

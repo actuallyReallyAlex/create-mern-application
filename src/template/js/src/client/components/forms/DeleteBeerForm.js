@@ -5,6 +5,7 @@ const DeleteBeerForm = ({
   currentBeer,
   refreshBeers,
   setCurrentBeer,
+  setIsLoading,
   setIsModalOpen,
   setModalContent,
 }) => {
@@ -14,11 +15,13 @@ const DeleteBeerForm = ({
       id="delete-beer-form"
       onSubmit={async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         await deleteBeer(currentBeer._id);
+        await refreshBeers();
         setIsModalOpen(false);
         setModalContent(null);
-        refreshBeers();
         setCurrentBeer(null);
+        setIsLoading(false);
       }}
     >
       <h3>Delete Beer</h3>

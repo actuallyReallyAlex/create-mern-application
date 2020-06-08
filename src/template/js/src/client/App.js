@@ -2,6 +2,7 @@ import * as React from "react";
 import logo from "./logo.svg";
 import { initializeStarterBeers, getBeers } from "./api/beer";
 import BeerDisplayer from "./components/BeerDisplayer";
+import LoadingIndicator from "./components/LoadingIndicator";
 import Modal from "./components/Modal";
 
 const App = () => {
@@ -9,6 +10,7 @@ const App = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [modalContent, setModalContent] = React.useState(null);
   const [currentBeer, setCurrentBeer] = React.useState(null);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const refreshBeers = async () => {
     try {
@@ -39,9 +41,6 @@ const App = () => {
     <div id="app">
       <img alt="Logo" id="logo" src={logo} />
       <h1>___APP NAME___</h1>
-      <p>
-        Edit <code>src/client/App.tsx</code> and save to reload.
-      </p>
       <a
         href="https://github.com/alexlee-dev/create-mern-application/"
         rel="noopener noreferrer"
@@ -61,9 +60,11 @@ const App = () => {
         modalContent={modalContent}
         refreshBeers={refreshBeers}
         setCurrentBeer={setCurrentBeer}
+        setIsLoading={setIsLoading}
         setIsModalOpen={setIsModalOpen}
         setModalContent={setModalContent}
       />
+      <LoadingIndicator isLoading={isLoading} />
     </div>
   );
 };

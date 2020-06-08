@@ -9,9 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Loading Indicator [#20](https://github.com/alexlee-dev/create-mern-application/issues/20)
+
 ### Changed
 
+- Async nature of adding/editing/deleting
+
 ### Removed
+
+- Removed line about editing App.tsx/App.js
 
 ### Fixed
 

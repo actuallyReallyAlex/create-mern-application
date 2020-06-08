@@ -10,6 +10,7 @@ export interface ModalProps {
   modalContent?: any;
   refreshBeers: Function;
   setCurrentBeer: Function;
+  setIsLoading: Function;
   setIsModalOpen: Function;
   setModalContent: Function;
 }
@@ -20,14 +21,14 @@ const Modal: React.SFC<ModalProps> = ({
   modalContent,
   refreshBeers,
   setCurrentBeer,
+  setIsLoading,
   setIsModalOpen,
   setModalContent,
 }) => {
   return (
     <>
       <div
-        className={!isModalOpen ? "hidden" : undefined}
-        id="shade"
+        className={!isModalOpen ? "hidden" : "shade"}
         onClick={() => {
           if (isModalOpen) setIsModalOpen(false);
         }}
@@ -47,6 +48,7 @@ const Modal: React.SFC<ModalProps> = ({
         {modalContent === "newBeerForm" && (
           <NewBeerForm
             refreshBeers={refreshBeers}
+            setIsLoading={setIsLoading}
             setIsModalOpen={setIsModalOpen}
             setModalContent={setModalContent}
           />
@@ -56,6 +58,7 @@ const Modal: React.SFC<ModalProps> = ({
             currentBeer={currentBeer}
             refreshBeers={refreshBeers}
             setCurrentBeer={setCurrentBeer}
+            setIsLoading={setIsLoading}
             setIsModalOpen={setIsModalOpen}
             setModalContent={setModalContent}
           />
@@ -65,6 +68,7 @@ const Modal: React.SFC<ModalProps> = ({
             currentBeer={currentBeer}
             refreshBeers={refreshBeers}
             setCurrentBeer={setCurrentBeer}
+            setIsLoading={setIsLoading}
             setIsModalOpen={setIsModalOpen}
             setModalContent={setModalContent}
           />

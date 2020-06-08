@@ -6,6 +6,7 @@ const EditBeerForm = ({
   currentBeer,
   refreshBeers,
   setCurrentBeer,
+  setIsLoading,
   setIsModalOpen,
   setModalContent,
 }) => {
@@ -40,6 +41,7 @@ const EditBeerForm = ({
       id="edit-beer-form"
       onSubmit={async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         await editBeer({
           id: currentBeer._id,
           abv: newBeerAbv,
@@ -48,10 +50,11 @@ const EditBeerForm = ({
           name: newBeerName,
           type: newBeerType,
         });
-        refreshBeers();
+        await refreshBeers();
         setIsModalOpen(false);
         setModalContent(null);
         setCurrentBeer(null);
+        setIsLoading(false);
       }}
     >
       <h3>Edit Beer</h3>

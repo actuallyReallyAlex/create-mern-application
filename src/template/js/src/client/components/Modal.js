@@ -9,14 +9,14 @@ const Modal = ({
   modalContent,
   refreshBeers,
   setCurrentBeer,
+  setIsLoading,
   setIsModalOpen,
   setModalContent,
 }) => {
   return (
     <>
       <div
-        className={!isModalOpen ? "hidden" : undefined}
-        id="shade"
+        className={!isModalOpen ? "hidden" : "shade"}
         onClick={() => {
           if (isModalOpen) setIsModalOpen(false);
         }}
@@ -36,6 +36,7 @@ const Modal = ({
         {modalContent === "newBeerForm" && (
           <NewBeerForm
             refreshBeers={refreshBeers}
+            setIsLoading={setIsLoading}
             setIsModalOpen={setIsModalOpen}
             setModalContent={setModalContent}
           />
@@ -45,6 +46,7 @@ const Modal = ({
             currentBeer={currentBeer}
             refreshBeers={refreshBeers}
             setCurrentBeer={setCurrentBeer}
+            setIsLoading={setIsLoading}
             setIsModalOpen={setIsModalOpen}
             setModalContent={setModalContent}
           />
@@ -54,6 +56,7 @@ const Modal = ({
             currentBeer={currentBeer}
             refreshBeers={refreshBeers}
             setCurrentBeer={setCurrentBeer}
+            setIsLoading={setIsLoading}
             setIsModalOpen={setIsModalOpen}
             setModalContent={setModalContent}
           />

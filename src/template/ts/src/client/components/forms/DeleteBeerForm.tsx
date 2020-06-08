@@ -6,6 +6,7 @@ export interface DeleteBeerForm {
   currentBeer: Beer;
   refreshBeers: Function;
   setCurrentBeer: Function;
+  setIsLoading: Function;
   setIsModalOpen: Function;
   setModalContent: Function;
 }
@@ -14,6 +15,7 @@ const DeleteBeerForm: React.SFC<DeleteBeerForm> = ({
   currentBeer,
   refreshBeers,
   setCurrentBeer,
+  setIsLoading,
   setIsModalOpen,
   setModalContent,
 }) => {
@@ -23,11 +25,13 @@ const DeleteBeerForm: React.SFC<DeleteBeerForm> = ({
       id="delete-beer-form"
       onSubmit={async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         await deleteBeer(currentBeer._id);
+        await refreshBeers();
         setIsModalOpen(false);
         setModalContent(null);
-        refreshBeers();
         setCurrentBeer(null);
+        setIsLoading(false);
       }}
     >
       <h3>Delete Beer</h3>

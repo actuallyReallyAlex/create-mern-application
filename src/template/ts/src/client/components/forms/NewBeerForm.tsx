@@ -3,12 +3,14 @@ import { addBeer } from "../../api/beer";
 
 export interface NewBeerFormProps {
   refreshBeers: Function;
+  setIsLoading: Function;
   setIsModalOpen: Function;
   setModalContent: Function;
 }
 
 const NewBeerForm: React.SFC<NewBeerFormProps> = ({
   refreshBeers,
+  setIsLoading,
   setIsModalOpen,
   setModalContent,
 }) => {
@@ -24,6 +26,7 @@ const NewBeerForm: React.SFC<NewBeerFormProps> = ({
       id="new-beer-form"
       onSubmit={async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         await addBeer({
           abv: newBeerAbv,
           brewer: newBeerBrewer,
@@ -31,9 +34,10 @@ const NewBeerForm: React.SFC<NewBeerFormProps> = ({
           name: newBeerName,
           type: newBeerType,
         });
-        refreshBeers();
+        await refreshBeers();
         setIsModalOpen(false);
         setModalContent(null);
+        setIsLoading(false);
       }}
     >
       <h3>Add New Beer</h3>

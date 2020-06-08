@@ -7,6 +7,7 @@ export interface EditBeerFormProps {
   currentBeer: Beer;
   refreshBeers: Function;
   setCurrentBeer: Function;
+  setIsLoading: Function;
   setIsModalOpen: Function;
   setModalContent: Function;
 }
@@ -15,6 +16,7 @@ const EditBeerForm: React.SFC<EditBeerFormProps> = ({
   currentBeer,
   refreshBeers,
   setCurrentBeer,
+  setIsLoading,
   setIsModalOpen,
   setModalContent,
 }) => {
@@ -49,6 +51,7 @@ const EditBeerForm: React.SFC<EditBeerFormProps> = ({
       id="edit-beer-form"
       onSubmit={async (e) => {
         e.preventDefault();
+        setIsLoading(true);
         await editBeer({
           id: currentBeer._id,
           abv: newBeerAbv,
@@ -57,10 +60,11 @@ const EditBeerForm: React.SFC<EditBeerFormProps> = ({
           name: newBeerName,
           type: newBeerType,
         });
-        refreshBeers();
+        await refreshBeers();
         setIsModalOpen(false);
         setModalContent(null);
         setCurrentBeer(null);
+        setIsLoading(false);
       }}
     >
       <h3>Edit Beer</h3>

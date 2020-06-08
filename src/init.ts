@@ -51,7 +51,7 @@ export const createProjectDirectory = async (
 
   const jsScripts = {
     build:
-      "rimraf dist && webpack --display=errors-only && rimraf build && babel src/server --out-dir build",
+      "rimraf dist && webpack --display=errors-only && rimraf build && babel src/server --out-dir build && copyfiles -f src/server/assets/**/* build/assets",
     dev: "env-cmd -e development npm run spinup",
     spinup: "node build/index.js",
     start:

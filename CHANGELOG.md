@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Bumps websocket-extensions from 0.1.3 to 0.1.4.
+- JS Template Assets not Copied to `/build` upon Build script [#21](https://github.com/alexlee-dev/create-mern-application/issues/21)
 
 ## [0.5.0] - 2020-06-05
 

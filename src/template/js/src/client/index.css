@@ -91,23 +91,28 @@ tbody tr:nth-child(even) {
   justify-content: flex-end;
 }
 
+#modal-close {
+  z-index: 2;
+}
+
 .hidden {
   display: none;
 }
 
-#new-beer-form {
+.form {
   display: flex;
   flex-direction: column;
 }
 
-#new-beer-form h3 {
+.form h3 {
   margin: 0;
+  margin-top: -22px;
 }
 
-#new-beer-form label {
+.form label {
   margin-top: 10px;
 }
 
-#new-beer-form button {
+.form button {
   margin-top: 25px;
 }

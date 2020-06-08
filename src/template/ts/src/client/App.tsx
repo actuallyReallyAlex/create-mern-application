@@ -8,6 +8,7 @@ const App: React.SFC<{}> = () => {
   const [beers, setBeers] = React.useState([]);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [modalContent, setModalContent] = React.useState(null);
+  const [currentBeer, setCurrentBeer] = React.useState(null);
 
   const refreshBeers = async (): Promise<void> => {
     try {
@@ -50,13 +51,17 @@ const App: React.SFC<{}> = () => {
       </a>
       <BeerDisplayer
         beers={beers}
+        refreshBeers={refreshBeers}
+        setCurrentBeer={setCurrentBeer}
         setIsModalOpen={setIsModalOpen}
         setModalContent={setModalContent}
       />
       <Modal
+        currentBeer={currentBeer}
         isModalOpen={isModalOpen}
         modalContent={modalContent}
         refreshBeers={refreshBeers}
+        setCurrentBeer={setCurrentBeer}
         setIsModalOpen={setIsModalOpen}
         setModalContent={setModalContent}
       />

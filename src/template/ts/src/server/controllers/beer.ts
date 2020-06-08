@@ -55,6 +55,20 @@ class BeerController {
         res.status(500).send({ error });
       }
     });
+
+    this.router.delete("/beer/:id", async (req: Request, res: Response) => {
+      try {
+        const beer = await Beer.findOneAndDelete({ _id: req.params.id });
+
+        if (!beer) {
+          return res.status(404).send();
+        }
+
+        res.send(beer);
+      } catch (error) {
+        res.status(500).send({ error });
+      }
+    });
   }
 }
 

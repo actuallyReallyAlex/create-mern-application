@@ -18,6 +18,7 @@ const NewBeerForm: React.SFC<NewBeerFormProps> = ({
 
   return (
     <form
+      className="form"
       id="new-beer-form"
       onSubmit={async (e) => {
         e.preventDefault();

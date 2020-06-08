@@ -10,6 +10,7 @@ const NewBeerForm = ({ refreshBeers, setIsModalOpen }) => {
 
   return (
     <form
+      className="form"
       id="new-beer-form"
       onSubmit={async (e) => {
         e.preventDefault();

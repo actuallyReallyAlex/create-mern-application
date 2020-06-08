@@ -3,12 +3,16 @@ import { Beer } from "../types";
 
 export interface BeerDisplayerProps {
   beers: Beer[];
+  refreshBeers: Function;
+  setCurrentBeer: Function;
   setIsModalOpen: Function;
   setModalContent: Function;
 }
 
 const BeerDisplayer: React.SFC<BeerDisplayerProps> = ({
   beers,
+  refreshBeers,
+  setCurrentBeer,
   setIsModalOpen,
   setModalContent,
 }) => {
@@ -46,7 +50,15 @@ const BeerDisplayer: React.SFC<BeerDisplayerProps> = ({
               <td>{beer.type}</td>
               <td className="column6 action-column">
                 <button>Edit</button>
-                <button>Delete</button>
+                <button
+                  onClick={() => {
+                    setModalContent("deleteBeerForm");
+                    setCurrentBeer(beer);
+                    setIsModalOpen(true);
+                  }}
+                >
+                  Delete
+                </button>
               </td>
             </tr>
           ))}

@@ -60,3 +60,16 @@ export const addBeer = async ({
     console.error(error);
   }
 };
+
+export const deleteBeer = async (id: string): Promise<void> => {
+  try {
+    await fetch(`/beer/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "DELETE",
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};

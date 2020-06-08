@@ -1,10 +1,13 @@
 import * as React from "react";
 import NewBeerForm from "./forms/NewBeerForm";
+import DeleteBeerForm from "./forms/DeleteBeerForm";
 
 const Modal = ({
+  currentBeer,
   isModalOpen,
   modalContent,
   refreshBeers,
+  setCurrentBeer,
   setIsModalOpen,
   setModalContent,
 }) => {
@@ -29,10 +32,21 @@ const Modal = ({
             x
           </button>
         </div>
-        <NewBeerForm
-          refreshBeers={refreshBeers}
-          setIsModalOpen={setIsModalOpen}
-        />
+        {modalContent === "newBeerForm" && (
+          <NewBeerForm
+            refreshBeers={refreshBeers}
+            setIsModalOpen={setIsModalOpen}
+          />
+        )}
+        {modalContent === "deleteBeerForm" && (
+          <DeleteBeerForm
+            currentBeer={currentBeer}
+            refreshBeers={refreshBeers}
+            setCurrentBeer={setCurrentBeer}
+            setIsModalOpen={setIsModalOpen}
+            setModalContent={setModalContent}
+          />
+        )}
       </div>
     </>
   );

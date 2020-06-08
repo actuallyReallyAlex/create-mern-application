@@ -2,7 +2,6 @@ import * as React from "react";
 
 const BeerDisplayer = ({
   beers,
-  refreshBeers,
   setCurrentBeer,
   setIsModalOpen,
   setModalContent,
@@ -40,7 +39,15 @@ const BeerDisplayer = ({
               <td>{beer.name}</td>
               <td>{beer.type}</td>
               <td className="column6 action-column">
-                <button>Edit</button>
+                <button
+                  onClick={() => {
+                    setModalContent("editBeerForm");
+                    setCurrentBeer(beer);
+                    setIsModalOpen(true);
+                  }}
+                >
+                  Edit
+                </button>
                 <button
                   onClick={() => {
                     setModalContent("deleteBeerForm");

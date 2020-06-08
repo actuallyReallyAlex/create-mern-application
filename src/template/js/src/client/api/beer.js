@@ -66,3 +66,24 @@ export const deleteBeer = async (id) => {
     console.error(error);
   }
 };
+
+export const editBeer = async ({
+  id,
+  abv,
+  brewer,
+  description,
+  name,
+  type,
+}) => {
+  try {
+    await fetch(`/beer/${id}`, {
+      body: JSON.stringify({ abv, brewer, description, name, type }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "PATCH",
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};

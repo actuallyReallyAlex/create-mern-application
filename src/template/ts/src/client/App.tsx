@@ -1,7 +1,7 @@
 import * as React from "react";
 import logo from "./logo.svg";
-import BeerDisplayer from "./components/BeerDisplayer";
 import { initializeStarterBeers, getBeers } from "./api/beer";
+import BeerDisplayer from "./components/BeerDisplayer";
 import Modal from "./components/Modal";
 
 const App: React.SFC<{}> = () => {
@@ -51,7 +51,6 @@ const App: React.SFC<{}> = () => {
       </a>
       <BeerDisplayer
         beers={beers}
-        refreshBeers={refreshBeers}
         setCurrentBeer={setCurrentBeer}
         setIsModalOpen={setIsModalOpen}
         setModalContent={setModalContent}

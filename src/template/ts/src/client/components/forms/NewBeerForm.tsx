@@ -4,11 +4,13 @@ import { addBeer } from "../../api/beer";
 export interface NewBeerFormProps {
   refreshBeers: Function;
   setIsModalOpen: Function;
+  setModalContent: Function;
 }
 
 const NewBeerForm: React.SFC<NewBeerFormProps> = ({
   refreshBeers,
   setIsModalOpen,
+  setModalContent,
 }) => {
   const [newBeerAbv, setNewBeerAbv] = React.useState(0.0);
   const [newBeerBrewer, setNewBeerBrewer] = React.useState("");
@@ -29,13 +31,9 @@ const NewBeerForm: React.SFC<NewBeerFormProps> = ({
           name: newBeerName,
           type: newBeerType,
         });
-        setIsModalOpen(false);
         refreshBeers();
-        setNewBeerAbv(0.0);
-        setNewBeerBrewer("");
-        setNewBeerDescription("");
-        setNewBeerName("");
-        setNewBeerType("");
+        setIsModalOpen(false);
+        setModalContent(null);
       }}
     >
       <h3>Add New Beer</h3>

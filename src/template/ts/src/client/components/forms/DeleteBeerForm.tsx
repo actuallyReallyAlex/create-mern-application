@@ -1,6 +1,6 @@
 import * as React from "react";
-import { Beer } from "../../types";
 import { deleteBeer } from "../../api/beer";
+import { Beer } from "../../types";
 
 export interface DeleteBeerForm {
   currentBeer: Beer;

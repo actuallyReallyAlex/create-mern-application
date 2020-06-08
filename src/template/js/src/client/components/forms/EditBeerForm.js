@@ -1,20 +1,47 @@
 import * as React from "react";
-import { addBeer } from "../../api/beer";
+import { editBeer } from "../../api/beer";
+import { isEqual } from "../../util";
 
-const NewBeerForm = ({ refreshBeers, setIsModalOpen, setModalContent }) => {
-  const [newBeerAbv, setNewBeerAbv] = React.useState(0.0);
-  const [newBeerBrewer, setNewBeerBrewer] = React.useState("");
-  const [newBeerDescription, setNewBeerDescription] = React.useState("");
-  const [newBeerName, setNewBeerName] = React.useState("");
-  const [newBeerType, setNewBeerType] = React.useState("");
+const EditBeerForm = ({
+  currentBeer,
+  refreshBeers,
+  setCurrentBeer,
+  setIsModalOpen,
+  setModalContent,
+}) => {
+  const [newBeerAbv, setNewBeerAbv] = React.useState(currentBeer.abv);
+  const [newBeerBrewer, setNewBeerBrewer] = React.useState(currentBeer.brewer);
+  const [newBeerDescription, setNewBeerDescription] = React.useState(
+    currentBeer.description
+  );
+  const [newBeerName, setNewBeerName] = React.useState(currentBeer.name);
+  const [newBeerType, setNewBeerType] = React.useState(currentBeer.type);
+
+  const isDisabled = isEqual(
+    {
+      abv: newBeerAbv,
+      brewer: newBeerBrewer,
+      description: newBeerDescription,
+      name: newBeerName,
+      type: newBeerType,
+    },
+    {
+      abv: currentBeer.abv,
+      brewer: currentBeer.brewer,
+      description: currentBeer.description,
+      name: currentBeer.name,
+      type: currentBeer.type,
+    }
+  );
 
   return (
     <form
       className="form"
-      id="new-beer-form"
+      id="edit-beer-form"
       onSubmit={async (e) => {
         e.preventDefault();
-        await addBeer({
+        await editBeer({
+          id: currentBeer._id,
           abv: newBeerAbv,
           brewer: newBeerBrewer,
           description: newBeerDescription,
@@ -24,10 +51,11 @@ const NewBeerForm = ({ refreshBeers, setIsModalOpen, setModalContent }) => {
         refreshBeers();
         setIsModalOpen(false);
         setModalContent(null);
+        setCurrentBeer(null);
       }}
     >
-      <h3>Add New Beer</h3>
-      <label htmlFor="new-beer-abv">ABV</label>
+      <h3>Edit Beer</h3>
+      <label htmlFor="edit-beer-abv">ABV</label>
       <input
         id="new-beer-abv"
         name="newBeerAbv"
@@ -67,9 +95,11 @@ const NewBeerForm = ({ refreshBeers, setIsModalOpen, setModalContent }) => {
         type="text"
         value={newBeerType}
       />
-      <button type="submit">Add</button>
+      <button disabled={isDisabled} type="submit">
+        Update
+      </button>
     </form>
   );
 };
 
-export default NewBeerForm;
+export default EditBeerForm;

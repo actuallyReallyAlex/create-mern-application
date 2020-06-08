@@ -1,6 +1,7 @@
 import * as React from "react";
-import NewBeerForm from "./forms/NewBeerForm";
 import DeleteBeerForm from "./forms/DeleteBeerForm";
+import EditBeerForm from "./forms/EditBeerForm";
+import NewBeerForm from "./forms/NewBeerForm";
 
 const Modal = ({
   currentBeer,
@@ -36,10 +37,20 @@ const Modal = ({
           <NewBeerForm
             refreshBeers={refreshBeers}
             setIsModalOpen={setIsModalOpen}
+            setModalContent={setModalContent}
           />
         )}
         {modalContent === "deleteBeerForm" && (
           <DeleteBeerForm
+            currentBeer={currentBeer}
+            refreshBeers={refreshBeers}
+            setCurrentBeer={setCurrentBeer}
+            setIsModalOpen={setIsModalOpen}
+            setModalContent={setModalContent}
+          />
+        )}
+        {modalContent === "editBeerForm" && (
+          <EditBeerForm
             currentBeer={currentBeer}
             refreshBeers={refreshBeers}
             setCurrentBeer={setCurrentBeer}

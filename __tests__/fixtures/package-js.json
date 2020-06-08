@@ -4,7 +4,7 @@
   "description": "A MERN application bootstrapped with create-mern-application.",
   "main": "build/index.js",
   "scripts": {
-    "build": "rimraf dist && webpack --display=errors-only && rimraf build && babel src/server --out-dir build",
+    "build": "rimraf dist && webpack --display=errors-only && rimraf build && babel src/server --out-dir build && copyfiles -f src/server/assets/**/* build/assets",
     "dev": "env-cmd -e development npm run spinup",
     "spinup": "node build/index.js",
     "start": "start-server-and-test dev http://localhost:3000 'webpack-dev-server --info=false'",
@@ -19,7 +19,7 @@
     "chalk": "^4.0.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongoose": "^5.9.17",
+    "mongoose": "^5.9.18",
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.0",
     "react": "^16.13.1",

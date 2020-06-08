@@ -1,28 +1,48 @@
 import * as React from "react";
 
-const BeerDisplayer = ({ beers }) => (
-  <table>
-    <thead>
-      <tr>
-        <th className="column1">ABV</th>
-        <th>Brewer</th>
-        <th>Description</th>
-        <th>Name</th>
-        <th className="column5">Type</th>
-      </tr>
-    </thead>
-    <tbody>
-      {beers.map((beer) => (
-        <tr key={beer._id}>
-          <td className="column1">{beer.abv}</td>
-          <td>{beer.brewer}</td>
-          <td>{beer.description}</td>
-          <td>{beer.name}</td>
-          <td className="column5">{beer.type}</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
-);
+const BeerDisplayer = ({ beers, setIsModalOpen, setModalContent }) => {
+  return (
+    <div>
+      <div id="beer-table-heading">
+        <h2>Beer List</h2>
+        <button
+          onClick={() => {
+            setModalContent("newBeerForm");
+            setIsModalOpen(true);
+          }}
+        >
+          Add
+        </button>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th className="column1">ABV</th>
+            <th>Brewer</th>
+            <th>Description</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th className="column6">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {beers.map((beer) => (
+            <tr key={beer._id}>
+              <td className="column1">{beer.abv}</td>
+              <td>{beer.brewer}</td>
+              <td>{beer.description}</td>
+              <td>{beer.name}</td>
+              <td>{beer.type}</td>
+              <td className="column6 action-column">
+                <button>Edit</button>
+                <button>Delete</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
 
 export default BeerDisplayer;

@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Ability to create a beer via UI [#16](https://github.com/alexlee-dev/create-mern-application/issues/16)
+
 ### Changed
 
 ### Removed

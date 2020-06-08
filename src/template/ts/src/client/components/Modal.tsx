@@ -1,0 +1,49 @@
+import * as React from "react";
+import NewBeerForm from "./forms/NewBeerForm";
+
+export interface ModalProps {
+  isModalOpen: boolean;
+  modalContent?: any;
+  refreshBeers: Function;
+  setIsModalOpen: Function;
+  setModalContent: Function;
+}
+
+const Modal: React.SFC<ModalProps> = ({
+  isModalOpen,
+  modalContent,
+  refreshBeers,
+  setIsModalOpen,
+  setModalContent,
+}) => {
+  return (
+    <>
+      <div
+        className={!isModalOpen ? "hidden" : undefined}
+        id="shade"
+        onClick={() => {
+          if (isModalOpen) setIsModalOpen(false);
+        }}
+      />
+      <div className={!isModalOpen ? "hidden" : undefined} id="modal">
+        <div id="modal-close-container">
+          <button
+            id="modal-close"
+            onClick={() => {
+              setIsModalOpen(false);
+              setModalContent(null);
+            }}
+          >
+            x
+          </button>
+        </div>
+        <NewBeerForm
+          refreshBeers={refreshBeers}
+          setIsModalOpen={setIsModalOpen}
+        />
+      </div>
+    </>
+  );
+};
+
+export default Modal;

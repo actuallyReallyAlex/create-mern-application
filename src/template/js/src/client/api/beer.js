@@ -33,3 +33,23 @@ export const getBeers = async () => {
     console.error(error);
   }
 };
+
+export const addBeer = async ({ abv, brewer, description, name, type }) => {
+  try {
+    await fetch("/beer", {
+      body: JSON.stringify({
+        abv,
+        brewer,
+        description,
+        name,
+        type,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};

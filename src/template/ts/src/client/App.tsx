@@ -1,10 +1,23 @@
 import * as React from "react";
 import logo from "./logo.svg";
-import BeerDisplayer from "./components/BeerDisplayer";
 import { initializeStarterBeers, getBeers } from "./api/beer";
+import BeerDisplayer from "./components/BeerDisplayer";
+import Modal from "./components/Modal";
 
 const App: React.SFC<{}> = () => {
   const [beers, setBeers] = React.useState([]);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [modalContent, setModalContent] = React.useState(null);
+  const [currentBeer, setCurrentBeer] = React.useState(null);
+
+  const refreshBeers = async (): Promise<void> => {
+    try {
+      const beers = await getBeers();
+      setBeers(beers);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   React.useEffect((): void => {
     const initializeData = async (): Promise<void> => {
@@ -15,7 +28,9 @@ const App: React.SFC<{}> = () => {
           currentBeers = await getBeers();
         }
         setBeers(currentBeers);
-      } catch (error) {}
+      } catch (error) {
+        console.error(error);
+      }
     };
     initializeData();
   }, []);
@@ -34,7 +49,21 @@ const App: React.SFC<{}> = () => {
       >
         View Documentation
       </a>
-      <BeerDisplayer beers={beers} />
+      <BeerDisplayer
+        beers={beers}
+        setCurrentBeer={setCurrentBeer}
+        setIsModalOpen={setIsModalOpen}
+        setModalContent={setModalContent}
+      />
+      <Modal
+        currentBeer={currentBeer}
+        isModalOpen={isModalOpen}
+        modalContent={modalContent}
+        refreshBeers={refreshBeers}
+        setCurrentBeer={setCurrentBeer}
+        setIsModalOpen={setIsModalOpen}
+        setModalContent={setModalContent}
+      />
     </div>
   );
 };

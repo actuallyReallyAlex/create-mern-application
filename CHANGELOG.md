@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.6.0] - 2020-06-08
+
+### 🍻Add/Edit/Delete Beers
+
+### Added
+
+- Ability to create a beer via UI [#16](https://github.com/alexlee-dev/create-mern-application/issues/16)
+- Ability to delete a beer via UI [#18](https://github.com/alexlee-dev/create-mern-application/issues/18)
+- Ability to edit a beer via UI [#17](https://github.com/alexlee-dev/create-mern-application/issues/17)
+
+### Changed
+
+### Removed
+
+### Fixed
+
+- Bumps websocket-extensions from 0.1.3 to 0.1.4.
+- JS Template Assets not Copied to `/build` upon Build script [#21](https://github.com/alexlee-dev/create-mern-application/issues/21)
+
 ## [0.5.0] - 2020-06-05
 
 ### 🍻 Beers in the DB

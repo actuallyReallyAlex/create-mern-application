@@ -33,3 +33,57 @@ export const getBeers = async () => {
     console.error(error);
   }
 };
+
+export const addBeer = async ({ abv, brewer, description, name, type }) => {
+  try {
+    await fetch("/beer", {
+      body: JSON.stringify({
+        abv,
+        brewer,
+        description,
+        name,
+        type,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const deleteBeer = async (id) => {
+  try {
+    await fetch(`/beer/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "DELETE",
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const editBeer = async ({
+  id,
+  abv,
+  brewer,
+  description,
+  name,
+  type,
+}) => {
+  try {
+    await fetch(`/beer/${id}`, {
+      body: JSON.stringify({ abv, brewer, description, name, type }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "PATCH",
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};

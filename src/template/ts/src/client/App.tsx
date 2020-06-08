@@ -10,7 +10,7 @@ const App: React.SFC<{}> = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [modalContent, setModalContent] = React.useState(null);
   const [currentBeer, setCurrentBeer] = React.useState(null);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(true);
 
   const refreshBeers = async (): Promise<void> => {
     try {
@@ -30,6 +30,7 @@ const App: React.SFC<{}> = () => {
           currentBeers = await getBeers();
         }
         setBeers(currentBeers);
+        setIsLoading(false);
       } catch (error) {
         console.error(error);
       }

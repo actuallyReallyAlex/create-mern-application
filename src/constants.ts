@@ -37,6 +37,17 @@ export const devDependencies = [
   "webpack",
   "webpack-cli",
   "webpack-dev-server",
+  "@types/react",
+  "@types/react-dom",
+  "@types/cors",
+  "@types/express",
+  "@types/mongoose",
+  "@types/morgan",
+  "@types/node-fetch",
+  "prettier",
+  "replace",
+  "rimraf",
+  "copyfiles",
 ];
 
 /**

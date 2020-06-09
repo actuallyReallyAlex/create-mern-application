@@ -199,7 +199,7 @@ export const copyTemplateFiles = async (
     spinner.start();
     const requiredFilesToCopy = [
       {
-        src: path.join(__dirname, `template/${language}/src`),
+        src: path.join(__dirname, `template/src`),
         dest: path.join(root, "/src"),
       },
       {
@@ -222,14 +222,15 @@ export const copyTemplateFiles = async (
         src: path.join(__dirname, `template/webpack-${language}.js`),
         dest: path.join(root, "/webpack.config.js"),
       },
-    ];
-
-    if (language === "ts") {
-      requiredFilesToCopy.push({
-        src: path.join(__dirname, `template/ts/index.d.ts`),
+      {
+        src: path.join(__dirname, `template/template-tsconfig.json`),
+        dest: path.join(root, "/template-tsconfig.json"),
+      },
+      {
+        src: path.join(__dirname, `template/index.d.ts`),
         dest: path.join(root, "/index.d.ts"),
-      });
-    }
+      },
+    ];
 
     // * Copy Template Files
     await Promise.all(
@@ -240,6 +241,78 @@ export const copyTemplateFiles = async (
         }
       )
     );
+
+    // TODO - Refactor this a lot!
+    // TODO - Uninstall unneeded js dependencies after using ts to compile js files
+    // TODO - Test ability to build create-mern-application as well as building template application
+    if (language === "js") {
+      // * Compile TS to JS
+      await executeCommand("tsc", ["-p", "template-tsconfig.json"], {
+        cwd: root,
+        shell: process.platform === "win32",
+      });
+      // * Format Compiled JS
+      await executeCommand("npx", ["prettier", "--write", "dist/**/*"], {
+        cwd: root,
+        shell: process.platform === "win32",
+      });
+      // * NEW LINE Replacer
+      // TODO - Use replacer not `replace`
+      await executeCommand(
+        "npx",
+        ["replace", "'(\\/\\* NEW LINE \\*\\/)'", "''", "dist", "-r"],
+        {
+          cwd: root,
+          shell: process.platform === "win32",
+        }
+      );
+      // * Copy Server Assets
+      await fs.copy(
+        path.join(root, "src/server/assets"),
+        path.join(root, "dist/server/assets")
+      );
+      // * Copy index.css
+      await fs.copy(
+        path.join(root, "src/client/index.css"),
+        path.join(root, "dist/client/index.css")
+      );
+      // * Copy logo.svg
+      await fs.copy(
+        path.join(root, "src/client/logo.svg"),
+        path.join(root, "dist/client/logo.svg")
+      );
+      // * Remove /src
+      await executeCommand("npx", ["rimraf", "src"], {
+        cwd: root,
+        shell: process.platform === "win32",
+      });
+      // * Copy /dist to /src
+      await fs.copy(path.join(root, "dist"), path.join(root, "src"));
+      // * Remove dist
+      await executeCommand("npx", ["rimraf", "dist"], {
+        cwd: root,
+        shell: process.platform === "win32",
+      });
+      // * Remove index.d.ts
+      await executeCommand("npx", ["rimraf", "index.d.ts"], {
+        cwd: root,
+        shell: process.platform === "win32",
+      });
+      // * Remove template-tsconfig.json
+      await executeCommand("npx", ["rimraf", "template-tsconfig.json"], {
+        cwd: root,
+        shell: process.platform === "win32",
+      });
+      // * Remove types
+      await executeCommand("npx", ["rimraf", "src/client/types.js"], {
+        cwd: root,
+        shell: process.platform === "win32",
+      });
+      await executeCommand("npx", ["rimraf", "src/server/types.js"], {
+        cwd: root,
+        shell: process.platform === "win32",
+      });
+    }
 
     // * Copy .babelrc for JS projects
     if (language === "js") {
@@ -253,7 +326,7 @@ export const copyTemplateFiles = async (
   } catch (error) {
     spinner.fail();
     console.log("");
-    throw new Error(error);
+    throw new Error(JSON.stringify(error, null, 2));
   }
 };
 
@@ -283,7 +356,7 @@ export const replaceTemplateValues = async (
     ];
 
     if (language === "js") {
-      replaceFiles.push(path.join(root, "/src/client/App.js"));
+      replaceFiles.push(path.join(root, "/src/client/App.jsx"));
     } else {
       replaceFiles.push(path.join(root, "/src/client/App.tsx"));
     }

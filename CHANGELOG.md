@@ -15,10 +15,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Async nature of adding/editing/deleting
 - Initial state is Loading [#24](https://github.com/alexlee-dev/create-mern-application/issues/24)
+- Template File Logic (Single TS Source - Build on Client) [#13](https://github.com/alexlee-dev/create-mern-application/issues/13)
 
 ### Removed
 
 - Removed line about editing App.tsx/App.js
+- JS Template Files [#13](https://github.com/alexlee-dev/create-mern-application/issues/13)
 
 ### Fixed
 

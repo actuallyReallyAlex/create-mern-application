@@ -29,7 +29,7 @@ module.exports = {
     },
   },
   devtool: "source-map",
-  entry: ["./src/client/index.js"],
+  entry: ["./src/client/index.jsx"],
   output: {
     path: path.join(__dirname, outputDirectory),
     filename: "bundle.js",
@@ -60,7 +60,7 @@ module.exports = {
       },
       {
         enforce: "pre",
-        test: /\.js$/,
+        test: /\.(js|jsx)$/,
         loader: "source-map-loader",
       },
       {

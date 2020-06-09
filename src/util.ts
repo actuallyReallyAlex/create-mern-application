@@ -10,28 +10,34 @@ import validateProjectName from "validate-npm-package-name";
  * @param command Command to execute in the process.
  * @param args Additional arguments to attach to the command.
  * @param options Optional options object to pass along.
+ * @param debug Optional logging of output.
  */
 export const executeCommand = async (
   command: string,
   args?: string[],
-  options?: { cwd?: string; shell?: boolean }
+  options?: { cwd?: string; path?: string; shell?: boolean },
+  debug?: boolean
 ): Promise<void | { code: number; signal: any }> =>
   new Promise((resolve, reject) => {
     const cp = spawn(command, args, options);
+    if (debug) {
+      cp.stdout.on("data", (data) => {
+        console.log(`stdout: ${data}`);
+      });
+
+      cp.stderr.on("data", (data) => {
+        console.error(`stderr: ${data}`);
+      });
+    }
+
     cp.on("error", (err: Error) => {
       if (err) {
-        console.log("");
-        console.error(JSON.stringify({ err, command, args, options }, null, 2));
         console.log("");
         reject(err.message);
       }
     });
     cp.on("exit", (code: number | null, signal) => {
       if (code !== 0) {
-        console.log("");
-        console.error(
-          JSON.stringify({ args, command, code, signal, options }, null, 2)
-        );
         console.log("");
         reject({ args, command, code, signal, options });
       }

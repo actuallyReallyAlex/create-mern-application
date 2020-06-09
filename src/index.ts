@@ -140,7 +140,7 @@ const main = async (): Promise<void> => {
       },
     }).notify();
   } catch (error) {
-    await cleanupError(applicationName);
+    // await cleanupError(applicationName);
     console.error(error);
     throw new Error(error);
   }

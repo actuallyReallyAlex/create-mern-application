@@ -81,7 +81,7 @@ export const editBeer = async ({
       headers: {
         "Content-Type": "application/json",
       },
-      method: "PATCH",
+      method: "PUT",
     });
   } catch (error) {
     console.error(error);

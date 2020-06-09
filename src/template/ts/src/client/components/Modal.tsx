@@ -53,7 +53,7 @@ const Modal: React.SFC<ModalProps> = ({
             setModalContent={setModalContent}
           />
         )}
-        {modalContent === "deleteBeerForm" && (
+        {modalContent === "deleteBeerForm" && currentBeer && (
           <DeleteBeerForm
             currentBeer={currentBeer}
             refreshBeers={refreshBeers}
@@ -63,7 +63,7 @@ const Modal: React.SFC<ModalProps> = ({
             setModalContent={setModalContent}
           />
         )}
-        {modalContent === "editBeerForm" && (
+        {modalContent === "editBeerForm" && currentBeer && (
           <EditBeerForm
             currentBeer={currentBeer}
             refreshBeers={refreshBeers}

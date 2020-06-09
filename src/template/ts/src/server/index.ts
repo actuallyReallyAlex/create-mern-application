@@ -27,6 +27,8 @@ const main = async (): Promise<void> => {
       return process.exit(1);
     }
 
+    if (!process.env.PORT) throw new Error("No PORT");
+
     const app = new App(
       [new AssetsController(), new BeerController(), new ScriptsController()],
       process.env.PORT

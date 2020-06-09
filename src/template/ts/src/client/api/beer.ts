@@ -25,32 +25,27 @@ export const initializeStarterBeers = async (): Promise<void> => {
   }
 };
 
-export const getBeers = async (): Promise<Beer[]> => {
+export const getBeers = async (): Promise<Beer[] | []> => {
   try {
     const response = await fetch("/beers");
     const beers: Beer[] = await response.json();
     return beers;
   } catch (error) {
     console.error(error);
+    return [];
   }
 };
 
-export const addBeer = async ({
-  abv,
-  brewer,
-  description,
-  name,
-  type,
+export const addBeer = async (beer: {
+  abv: number;
+  brewer: string;
+  description: string;
+  name: string;
+  type: string;
 }): Promise<void> => {
   try {
     await fetch("/beer", {
-      body: JSON.stringify({
-        abv,
-        brewer,
-        description,
-        name,
-        type,
-      }),
+      body: JSON.stringify(beer),
       headers: {
         "Content-Type": "application/json",
       },
@@ -74,21 +69,21 @@ export const deleteBeer = async (id: string): Promise<void> => {
   }
 };
 
-export const editBeer = async ({
-  id,
-  abv,
-  brewer,
-  description,
-  name,
-  type,
+export const editBeer = async (beer: {
+  id: string;
+  abv: number;
+  brewer: string;
+  description: string;
+  name: string;
+  type: string;
 }): Promise<void> => {
   try {
-    await fetch(`/beer/${id}`, {
-      body: JSON.stringify({ abv, brewer, description, name, type }),
+    await fetch(`/beer/${beer.id}`, {
+      body: JSON.stringify(beer),
       headers: {
         "Content-Type": "application/json",
       },
-      method: "PATCH",
+      method: "PUT",
     });
   } catch (error) {
     console.error(error);

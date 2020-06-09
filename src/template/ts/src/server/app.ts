@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import cors from "cors";
+import cors, { CorsOptions } from "cors";
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
@@ -21,6 +21,8 @@ class App {
   }
 
   private initializeMiddlewares(): void {
+    if (!process.env.MONGODB_URL) throw new Error("No MOONGODB_URL");
+
     mongoose.connect(process.env.MONGODB_URL, {
       useNewUrlParser: true,
       useCreateIndex: true,
@@ -36,14 +38,14 @@ class App {
       undefined,
     ];
 
-    const corsOptions = {
-      origin: (origin: string, cb: Function): void => {
-        if (whitelistDomains.indexOf(origin) !== -1) {
-          cb(null, true);
+    const corsOptions: CorsOptions = {
+      origin: (requestOrigin: string | undefined, callback: Function): void => {
+        if (whitelistDomains.indexOf(requestOrigin) !== -1) {
+          callback(null, true);
         } else {
           // eslint-disable-next-line no-console
-          console.error(`Sever refused to allow: ${origin}`);
-          cb(new Error("Not allowed by CORS"));
+          console.error(`Sever refused to allow: ${requestOrigin}`);
+          callback(new Error("Not allowed by CORS"));
         }
       },
     };

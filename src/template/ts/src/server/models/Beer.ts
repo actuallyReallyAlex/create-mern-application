@@ -26,7 +26,7 @@ const beerSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-function applicationToJSON(): void {
+function applicationToJSON(this: any): void {
   return this.toObject();
 }
 

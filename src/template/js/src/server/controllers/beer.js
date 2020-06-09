@@ -37,7 +37,7 @@ class BeerController {
       }
     });
 
-    this.router.patch("/beer/:id", async (req, res) => {
+    this.router.put("/beer/:id", async (req, res) => {
       try {
         const beer = await Beer.findById(req.params.id);
 

@@ -1,5 +1,6 @@
 import express, { Request, Response, Router } from "express";
 import Beer from "../models/Beer";
+import { BeerDocument, BeerEditRequest } from "../types";
 
 class BeerController {
   public router: Router = express.Router();
@@ -37,24 +38,30 @@ class BeerController {
       }
     });
 
-    this.router.patch("/beer/:id", async (req: Request, res: Response) => {
-      try {
-        const beer = await Beer.findById(req.params.id);
+    this.router.put(
+      "/beer/:id",
+      async (req: BeerEditRequest, res: Response) => {
+        try {
+          const beer = (await Beer.findById(req.params.id)) as BeerDocument;
 
-        if (!beer) {
-          return res.status(404).send();
+          if (!beer) {
+            return res.status(404).send();
+          }
+
+          beer.abv = req.body.abv;
+          beer.brewer = req.body.brewer;
+          beer.description = req.body.description;
+          beer.name = req.body.name;
+          beer.type = req.body.type;
+
+          await beer.save();
+
+          res.send(beer);
+        } catch (error) {
+          res.status(500).send({ error });
         }
-
-        const updates = Object.keys(req.body);
-        updates.forEach((update) => (beer[update] = req.body[update]));
-
-        await beer.save();
-
-        res.send(beer);
-      } catch (error) {
-        res.status(500).send({ error });
       }
-    });
+    );
 
     this.router.delete("/beer/:id", async (req: Request, res: Response) => {
       try {

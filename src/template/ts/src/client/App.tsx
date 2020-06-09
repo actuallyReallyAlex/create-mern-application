@@ -4,12 +4,13 @@ import { initializeStarterBeers, getBeers } from "./api/beer";
 import BeerDisplayer from "./components/BeerDisplayer";
 import LoadingIndicator from "./components/LoadingIndicator";
 import Modal from "./components/Modal";
+import { Beer } from "./types";
 
 const App: React.SFC<{}> = () => {
-  const [beers, setBeers] = React.useState([]);
+  const [beers, setBeers] = React.useState<[] | Beer[]>([]);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
   const [modalContent, setModalContent] = React.useState(null);
-  const [currentBeer, setCurrentBeer] = React.useState(null);
+  const [currentBeer, setCurrentBeer] = React.useState(undefined);
   const [isLoading, setIsLoading] = React.useState(true);
 
   const refreshBeers = async (): Promise<void> => {

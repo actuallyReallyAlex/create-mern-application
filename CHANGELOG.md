@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Enhanced Testing - [#27](https://github.com/alexlee-dev/create-mern-application/issues/27)
+
 ### Removed
 
 ### Fixed

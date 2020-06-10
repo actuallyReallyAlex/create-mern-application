@@ -23,13 +23,8 @@ export const executeCommand = async (
   new Promise((resolve, reject) => {
     const cp = spawn(command, args, options);
     if (debug) {
-      cp.stdout.on("data", (data) => {
-        console.log(`stdout: ${data}`);
-      });
-
-      cp.stderr.on("data", (data) => {
-        console.error(`stderr: ${data}`);
-      });
+      cp.stdout.on("data", (data) => console.log(`stdout: ${data}`));
+      cp.stderr.on("data", (data) => console.log(`stderr: ${data}`));
     }
 
     cp.on("error", (err: Error) => {
@@ -45,9 +40,7 @@ export const executeCommand = async (
       }
       resolve();
     });
-    cp.on("message", (message) => {
-      console.log({ message });
-    });
+    cp.on("message", (message) => console.log({ message }));
   });
 
 /**

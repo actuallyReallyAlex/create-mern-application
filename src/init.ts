@@ -1,7 +1,7 @@
 // TODO - programatically create webpack
 // TODO - programatically create images in assets
-// TODO - Uninstall unneeded js dependencies after using ts to compile js files
 // TODO - Test ability to build create-mern-application as well as building template application
+// TODO - Update Test to use commands and be more robust
 import chalk from "chalk";
 import fs from "fs-extra";
 import ora from "ora";
@@ -12,6 +12,7 @@ import {
   buildFilesToCopy,
   buildFilesToRemove,
   dependencies,
+  dependenciesToCleanup,
   devDependencies,
   devDependenciesTS,
 } from "./constants";
@@ -244,6 +245,8 @@ export const buildSourceFiles = async (
   let spinner = ora("Building source files");
 
   try {
+    spinner.start();
+
     // * Compile TS to JS
     await executeCommand("tsc", ["-p", "template-tsconfig.json"], {
       cwd: root,
@@ -294,6 +297,38 @@ export const buildSourceFiles = async (
     spinner.fail();
     console.log("");
     throw new Error(JSON.stringify(error, null, 2));
+  }
+};
+
+/**
+ * Cleans up dependencies after compiling with TS.
+ * @param applicationName Name of application.
+ */
+export const cleanUpDependencies = async (
+  applicationName: string
+): Promise<void> => {
+  // * Application Directory
+  const root = path.resolve(applicationName);
+
+  let spinner = ora("Cleaning dependencies");
+
+  try {
+    spinner.start();
+
+    const unInstallCommand = "npm";
+    let uninstallArgs = ["uninstall"];
+    uninstallArgs = uninstallArgs.concat(dependenciesToCleanup);
+    // * Create a process that installs the dependencies
+    await executeCommand(unInstallCommand, uninstallArgs, {
+      cwd: root,
+      shell: process.platform === "win32",
+    });
+
+    spinner.succeed("Dependencies cleaned successfully");
+  } catch (error) {
+    spinner.fail();
+    console.log("");
+    throw new Error(error);
   }
 };
 

@@ -15,14 +15,15 @@ Sentry.init({
 });
 
 import {
+  buildSourceFiles,
   copyTemplateFiles,
+  cleanUpDependencies,
   createProjectDirectory,
-  installDependencies,
-  installDevDependencies,
   createTSConfig,
   displaySuccessMessage,
+  installDependencies,
+  installDevDependencies,
   replaceTemplateValues,
-  buildSourceFiles,
 } from "./init";
 import {
   cleanupError,
@@ -128,6 +129,9 @@ const main = async (): Promise<void> => {
     if (language === "js") {
       // * Builds source files
       await buildSourceFiles(applicationName);
+
+      // * Clean up no longer needed dependencies/devDependencies
+      await cleanUpDependencies(applicationName);
     }
 
     // * Replaces template files placeholder values with real values for the application.
@@ -146,7 +150,7 @@ const main = async (): Promise<void> => {
       },
     }).notify();
   } catch (error) {
-    // await cleanupError(applicationName);
+    await cleanupError(applicationName);
     console.error(error);
     throw new Error(error);
   }

@@ -44,10 +44,6 @@ export const devDependencies = [
   "@types/mongoose",
   "@types/morgan",
   "@types/node-fetch",
-  "prettier",
-  "replace",
-  "rimraf",
-  "copyfiles",
 ];
 
 /**
@@ -99,4 +95,14 @@ export const buildFilesToRemove = [
   "template-tsconfig.json",
   "/src/client/types.js",
   "/src/server/types.js",
+];
+
+export const dependenciesToCleanup = [
+  "@types/cors",
+  "@types/express",
+  "@types/mongoose",
+  "@types/morgan",
+  "@types/node-fetch",
+  "@types/react",
+  "@types/react-dom",
 ];

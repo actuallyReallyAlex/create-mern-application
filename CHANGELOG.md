@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.7.0] - 2020-06-10
+
+### 🏗️ Build JS from TS
+
+### Added
+
+- Loading Indicator [#20](https://github.com/alexlee-dev/create-mern-application/issues/20)
+
+### Changed
+
+- Async nature of adding/editing/deleting
+- Initial state is Loading [#24](https://github.com/alexlee-dev/create-mern-application/issues/24)
+- Template File Logic (Single TS Source - Build on Client) [#13](https://github.com/alexlee-dev/create-mern-application/issues/13)
+
+### Removed
+
+- Removed line about editing App.tsx/App.js
+- JS Template Files [#13](https://github.com/alexlee-dev/create-mern-application/issues/13)
+
+### Fixed
+
 ## [0.6.0] - 2020-06-08
 
 ### 🍻Add/Edit/Delete Beers

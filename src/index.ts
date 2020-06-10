@@ -11,16 +11,18 @@ const pkg = require("../package.json");
 Sentry.init({
   dsn:
     "https://44111e696abc456c959aef6dfc97f6a7@o202486.ingest.sentry.io/5262339",
-  release: "0.6.0",
+  release: "0.7.0",
 });
 
 import {
+  buildSourceFiles,
   copyTemplateFiles,
+  cleanUpDependencies,
   createProjectDirectory,
-  installDependencies,
-  installDevDependencies,
   createTSConfig,
   displaySuccessMessage,
+  installDependencies,
+  installDevDependencies,
   replaceTemplateValues,
 } from "./init";
 import {
@@ -42,7 +44,7 @@ const main = async (): Promise<void> => {
      * The program that parses the initial user input
      */
     const program = new commander.Command("create-mern-application")
-      .version("0.6.0")
+      .version("0.7.0")
       .arguments("<application-name>")
       .usage(`${chalk.blueBright("<application-name>")} [options]`)
       .action((name) => {
@@ -123,6 +125,14 @@ const main = async (): Promise<void> => {
 
     // * Copies template files
     await copyTemplateFiles(applicationName, language);
+
+    if (language === "js") {
+      // * Builds source files
+      await buildSourceFiles(applicationName);
+
+      // * Clean up no longer needed dependencies/devDependencies
+      await cleanUpDependencies(applicationName);
+    }
 
     // * Replaces template files placeholder values with real values for the application.
     await replaceTemplateValues(applicationName, language, authorName);

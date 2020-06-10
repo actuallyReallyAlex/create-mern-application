@@ -37,6 +37,13 @@ export const devDependencies = [
   "webpack",
   "webpack-cli",
   "webpack-dev-server",
+  "@types/react",
+  "@types/react-dom",
+  "@types/cors",
+  "@types/express",
+  "@types/mongoose",
+  "@types/morgan",
+  "@types/node-fetch",
 ];
 
 /**
@@ -65,4 +72,37 @@ export const devDependenciesTS = [
   "webpack",
   "webpack-cli",
   "webpack-dev-server",
+];
+
+export const buildFilesToCopy = [
+  {
+    src: "src/server/assets",
+    dest: "dist/server/assets",
+  },
+  {
+    src: "src/client/index.css",
+    dest: "dist/client/index.css",
+  },
+  {
+    src: "src/client/logo.svg",
+    dest: "dist/client/logo.svg",
+  },
+];
+
+export const buildFilesToRemove = [
+  "dist",
+  "index.d.ts",
+  "template-tsconfig.json",
+  "/src/client/types.js",
+  "/src/server/types.js",
+];
+
+export const dependenciesToCleanup = [
+  "@types/cors",
+  "@types/express",
+  "@types/mongoose",
+  "@types/morgan",
+  "@types/node-fetch",
+  "@types/react",
+  "@types/react-dom",
 ];

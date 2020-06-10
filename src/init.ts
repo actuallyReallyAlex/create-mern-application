@@ -1,11 +1,23 @@
+// TODO - programatically create webpack
+// TODO - programatically create images in assets
+// TODO - Test ability to build create-mern-application as well as building template application
+// TODO - Update Test to use commands and be more robust
 import chalk from "chalk";
 import fs from "fs-extra";
 import ora from "ora";
 import os from "os";
 import path from "path";
 
-import { dependencies, devDependencies, devDependenciesTS } from "./constants";
-import { executeCommand, valueReplacer } from "./util";
+import {
+  buildFilesToCopy,
+  buildFilesToRemove,
+  dependencies,
+  dependenciesToCleanup,
+  devDependencies,
+  devDependenciesTS,
+} from "./constants";
+import { executeCommand, valueReplacer, generateFilesToCopyArr } from "./util";
+import { FileCopy } from "./types";
 
 /**
  * Creates a project directory and a package.json inside that new directory.
@@ -197,59 +209,122 @@ export const copyTemplateFiles = async (
 
   try {
     spinner.start();
-    const requiredFilesToCopy = [
-      {
-        src: path.join(__dirname, `template/${language}/src`),
-        dest: path.join(root, "/src"),
-      },
-      {
-        src: path.join(__dirname, `template/public`),
-        dest: path.join(root, "/public"),
-      },
-      {
-        src: path.join(__dirname, `template/env-cmdrc.json`),
-        dest: path.join(root, "/.env-cmdrc.json"),
-      },
-      {
-        src: path.join(__dirname, "template/README.md"),
-        dest: path.join(root, "/README.md"),
-      },
-      {
-        src: path.join(__dirname, "template/gitignore"),
-        dest: path.join(root, "/.gitignore"),
-      },
-      {
-        src: path.join(__dirname, `template/webpack-${language}.js`),
-        dest: path.join(root, "/webpack.config.js"),
-      },
-    ];
 
-    if (language === "ts") {
-      requiredFilesToCopy.push({
-        src: path.join(__dirname, `template/ts/index.d.ts`),
-        dest: path.join(root, "/index.d.ts"),
-      });
-    }
+    const requiredFilesToCopy = generateFilesToCopyArr(
+      __dirname,
+      root,
+      language
+    );
 
     // * Copy Template Files
     await Promise.all(
-      requiredFilesToCopy.map(
-        async (fileInfo: { src: string; dest: string }) => {
-          await fs.copy(fileInfo.src, fileInfo.dest);
-          return;
-        }
-      )
+      requiredFilesToCopy.map(async (fileInfo: FileCopy) => {
+        await fs.copy(fileInfo.src, fileInfo.dest);
+        return;
+      })
     );
 
-    // * Copy .babelrc for JS projects
-    if (language === "js") {
-      await fs.copy(
-        path.join(__dirname, "template/babelrc"),
-        path.join(root, "/.babelrc")
-      );
-    }
-
     spinner.succeed("Template files copied successfully");
+  } catch (error) {
+    spinner.fail();
+    console.log("");
+    throw new Error(JSON.stringify(error, null, 2));
+  }
+};
+
+/**
+ * Builds source files.
+ * @param applicationName Name of application.
+ */
+export const buildSourceFiles = async (
+  applicationName: string
+): Promise<void> => {
+  // * Application Directory
+  const root = path.resolve(applicationName);
+
+  let spinner = ora("Building source files");
+
+  try {
+    spinner.start();
+
+    // * Compile TS to JS
+    await executeCommand("tsc", ["-p", "template-tsconfig.json"], {
+      cwd: root,
+      shell: process.platform === "win32",
+    });
+
+    // * Format Compiled JS
+    await executeCommand("npx", ["prettier", "--write", "dist/**/*"], {
+      cwd: root,
+      shell: process.platform === "win32",
+    });
+
+    // * NEW LINE Replacer
+    // TODO - Use custom replacer not `replace`
+    await executeCommand(
+      "npx",
+      ["replace", "'(\\/\\* NEW LINE \\*\\/)'", "''", "dist", "-r"],
+      {
+        cwd: root,
+        shell: process.platform === "win32",
+      }
+    );
+
+    // * Copy Files
+    await Promise.all(
+      buildFilesToCopy.map(async (file: { src: string; dest: string }) => {
+        await fs.copy(path.join(root, file.src), path.join(root, file.dest));
+        return;
+      })
+    );
+
+    // * Remove /src
+    await fs.remove(path.join(root, "src"));
+
+    // * Copy /dist to /src
+    await fs.copy(path.join(root, "dist"), path.join(root, "src"));
+
+    // * Remove Files
+    await Promise.all(
+      buildFilesToRemove.map(async (file: string) => {
+        await fs.remove(path.join(root, file));
+        return;
+      })
+    );
+
+    spinner.succeed("Source files built successfully");
+  } catch (error) {
+    spinner.fail();
+    console.log("");
+    throw new Error(JSON.stringify(error, null, 2));
+  }
+};
+
+/**
+ * Cleans up dependencies after compiling with TS.
+ * @param applicationName Name of application.
+ */
+export const cleanUpDependencies = async (
+  applicationName: string
+): Promise<void> => {
+  // * Application Directory
+  const root = path.resolve(applicationName);
+
+  let spinner = ora("Cleaning dependencies");
+
+  try {
+    spinner.start();
+
+    const unInstallCommand = "npm";
+    let uninstallArgs = ["uninstall"];
+    uninstallArgs = uninstallArgs.concat(dependenciesToCleanup);
+    // * Create a process that installs the dependencies
+    await executeCommand(unInstallCommand, uninstallArgs, {
+      cwd: root,
+      shell: process.platform === "win32",
+    });
+
+    spinner.succeed("Dependencies cleaned successfully");
   } catch (error) {
     spinner.fail();
     console.log("");
@@ -283,7 +358,7 @@ export const replaceTemplateValues = async (
     ];
 
     if (language === "js") {
-      replaceFiles.push(path.join(root, "/src/client/App.js"));
+      replaceFiles.push(path.join(root, "/src/client/App.jsx"));
     } else {
       replaceFiles.push(path.join(root, "/src/client/App.tsx"));
     }

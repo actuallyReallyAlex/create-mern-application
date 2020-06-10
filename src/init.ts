@@ -1,11 +1,22 @@
+// TODO - programatically create webpack
+// TODO - programatically create images in assets
+// TODO - Uninstall unneeded js dependencies after using ts to compile js files
+// TODO - Test ability to build create-mern-application as well as building template application
 import chalk from "chalk";
 import fs from "fs-extra";
 import ora from "ora";
 import os from "os";
 import path from "path";
 
-import { dependencies, devDependencies, devDependenciesTS } from "./constants";
-import { executeCommand, valueReplacer } from "./util";
+import {
+  buildFilesToCopy,
+  buildFilesToRemove,
+  dependencies,
+  devDependencies,
+  devDependenciesTS,
+} from "./constants";
+import { executeCommand, valueReplacer, generateFilesToCopyArr } from "./util";
+import { FileCopy } from "./types";
 
 /**
  * Creates a project directory and a package.json inside that new directory.
@@ -197,132 +208,88 @@ export const copyTemplateFiles = async (
 
   try {
     spinner.start();
-    const requiredFilesToCopy = [
-      {
-        src: path.join(__dirname, `template/src`),
-        dest: path.join(root, "/src"),
-      },
-      {
-        src: path.join(__dirname, `template/public`),
-        dest: path.join(root, "/public"),
-      },
-      {
-        src: path.join(__dirname, `template/env-cmdrc.json`),
-        dest: path.join(root, "/.env-cmdrc.json"),
-      },
-      {
-        src: path.join(__dirname, "template/README.md"),
-        dest: path.join(root, "/README.md"),
-      },
-      {
-        src: path.join(__dirname, "template/gitignore"),
-        dest: path.join(root, "/.gitignore"),
-      },
-      {
-        src: path.join(__dirname, `template/webpack-${language}.js`),
-        dest: path.join(root, "/webpack.config.js"),
-      },
-      {
-        src: path.join(__dirname, `template/template-tsconfig.json`),
-        dest: path.join(root, "/template-tsconfig.json"),
-      },
-      {
-        src: path.join(__dirname, `template/index.d.ts`),
-        dest: path.join(root, "/index.d.ts"),
-      },
-    ];
+
+    const requiredFilesToCopy = generateFilesToCopyArr(
+      __dirname,
+      root,
+      language
+    );
 
     // * Copy Template Files
     await Promise.all(
-      requiredFilesToCopy.map(
-        async (fileInfo: { src: string; dest: string }) => {
-          await fs.copy(fileInfo.src, fileInfo.dest);
-          return;
-        }
-      )
+      requiredFilesToCopy.map(async (fileInfo: FileCopy) => {
+        await fs.copy(fileInfo.src, fileInfo.dest);
+        return;
+      })
     );
 
-    // TODO - Refactor this a lot!
-    // TODO - Uninstall unneeded js dependencies after using ts to compile js files
-    // TODO - Test ability to build create-mern-application as well as building template application
-    if (language === "js") {
-      // * Compile TS to JS
-      await executeCommand("tsc", ["-p", "template-tsconfig.json"], {
-        cwd: root,
-        shell: process.platform === "win32",
-      });
-      // * Format Compiled JS
-      await executeCommand("npx", ["prettier", "--write", "dist/**/*"], {
-        cwd: root,
-        shell: process.platform === "win32",
-      });
-      // * NEW LINE Replacer
-      // TODO - Use replacer not `replace`
-      await executeCommand(
-        "npx",
-        ["replace", "'(\\/\\* NEW LINE \\*\\/)'", "''", "dist", "-r"],
-        {
-          cwd: root,
-          shell: process.platform === "win32",
-        }
-      );
-      // * Copy Server Assets
-      await fs.copy(
-        path.join(root, "src/server/assets"),
-        path.join(root, "dist/server/assets")
-      );
-      // * Copy index.css
-      await fs.copy(
-        path.join(root, "src/client/index.css"),
-        path.join(root, "dist/client/index.css")
-      );
-      // * Copy logo.svg
-      await fs.copy(
-        path.join(root, "src/client/logo.svg"),
-        path.join(root, "dist/client/logo.svg")
-      );
-      // * Remove /src
-      await executeCommand("npx", ["rimraf", "src"], {
-        cwd: root,
-        shell: process.platform === "win32",
-      });
-      // * Copy /dist to /src
-      await fs.copy(path.join(root, "dist"), path.join(root, "src"));
-      // * Remove dist
-      await executeCommand("npx", ["rimraf", "dist"], {
-        cwd: root,
-        shell: process.platform === "win32",
-      });
-      // * Remove index.d.ts
-      await executeCommand("npx", ["rimraf", "index.d.ts"], {
-        cwd: root,
-        shell: process.platform === "win32",
-      });
-      // * Remove template-tsconfig.json
-      await executeCommand("npx", ["rimraf", "template-tsconfig.json"], {
-        cwd: root,
-        shell: process.platform === "win32",
-      });
-      // * Remove types
-      await executeCommand("npx", ["rimraf", "src/client/types.js"], {
-        cwd: root,
-        shell: process.platform === "win32",
-      });
-      await executeCommand("npx", ["rimraf", "src/server/types.js"], {
-        cwd: root,
-        shell: process.platform === "win32",
-      });
-    }
-
-    // * Copy .babelrc for JS projects
-    if (language === "js") {
-      await fs.copy(
-        path.join(__dirname, "template/babelrc"),
-        path.join(root, "/.babelrc")
-      );
-    }
-
     spinner.succeed("Template files copied successfully");
+  } catch (error) {
+    spinner.fail();
+    console.log("");
+    throw new Error(JSON.stringify(error, null, 2));
+  }
+};
+
+/**
+ * Builds source files.
+ * @param applicationName Name of application.
+ */
+export const buildSourceFiles = async (
+  applicationName: string
+): Promise<void> => {
+  // * Application Directory
+  const root = path.resolve(applicationName);
+
+  let spinner = ora("Building source files");
+
+  try {
+    // * Compile TS to JS
+    await executeCommand("tsc", ["-p", "template-tsconfig.json"], {
+      cwd: root,
+      shell: process.platform === "win32",
+    });
+
+    // * Format Compiled JS
+    await executeCommand("npx", ["prettier", "--write", "dist/**/*"], {
+      cwd: root,
+      shell: process.platform === "win32",
+    });
+
+    // * NEW LINE Replacer
+    // TODO - Use custom replacer not `replace`
+    await executeCommand(
+      "npx",
+      ["replace", "'(\\/\\* NEW LINE \\*\\/)'", "''", "dist", "-r"],
+      {
+        cwd: root,
+        shell: process.platform === "win32",
+      }
+    );
+
+    // * Copy Files
+    await Promise.all(
+      buildFilesToCopy.map(async (file: { src: string; dest: string }) => {
+        await fs.copy(path.join(root, file.src), path.join(root, file.dest));
+        return;
+      })
+    );
+
+    // * Remove /src
+    await fs.remove(path.join(root, "src"));
+
+    // * Copy /dist to /src
+    await fs.copy(path.join(root, "dist"), path.join(root, "src"));
+
+    // * Remove Files
+    await Promise.all(
+      buildFilesToRemove.map(async (file: string) => {
+        await fs.remove(path.join(root, file));
+        return;
+      })
+    );
+
+    spinner.succeed("Source files built successfully");
   } catch (error) {
     spinner.fail();
     console.log("");

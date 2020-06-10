@@ -22,6 +22,7 @@ import {
   createTSConfig,
   displaySuccessMessage,
   replaceTemplateValues,
+  buildSourceFiles,
 } from "./init";
 import {
   cleanupError,
@@ -123,6 +124,11 @@ const main = async (): Promise<void> => {
 
     // * Copies template files
     await copyTemplateFiles(applicationName, language);
+
+    if (language === "js") {
+      // * Builds source files
+      await buildSourceFiles(applicationName);
+    }
 
     // * Replaces template files placeholder values with real values for the application.
     await replaceTemplateValues(applicationName, language, authorName);

@@ -77,3 +77,26 @@ export const devDependenciesTS = [
   "webpack-cli",
   "webpack-dev-server",
 ];
+
+export const buildFilesToCopy = [
+  {
+    src: "src/server/assets",
+    dest: "dist/server/assets",
+  },
+  {
+    src: "src/client/index.css",
+    dest: "dist/client/index.css",
+  },
+  {
+    src: "src/client/logo.svg",
+    dest: "dist/client/logo.svg",
+  },
+];
+
+export const buildFilesToRemove = [
+  "dist",
+  "index.d.ts",
+  "template-tsconfig.json",
+  "/src/client/types.js",
+  "/src/server/types.js",
+];

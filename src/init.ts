@@ -1,7 +1,3 @@
-// TODO - programatically create webpack
-// TODO - programatically create images in assets
-// TODO - Test ability to build create-mern-application as well as building template application
-// TODO - Update Test to use commands and be more robust
 import chalk from "chalk";
 import fs from "fs-extra";
 import ora from "ora";
@@ -127,19 +123,12 @@ export const installDependencies = async (
     const installCommand = "npm";
     let installArgs = ["install", "--save"];
     installArgs = installArgs.concat(dependencies);
-    // * Verify that the directory exists 1st
-    const pathExists = await fs.pathExists(root);
-    if (pathExists) {
-      // * Create a process that installs the dependencies
-      await executeCommand(installCommand, installArgs, {
-        cwd: root,
-        shell: process.platform === "win32",
-      });
-      spinner.succeed("Dependencies installed successfully");
-    } else {
-      spinner.fail(`Path: ${root} does not exist.`);
-      throw new Error(`Path: ${root} does not exist.`);
-    }
+    // * Create a process that installs the dependencies
+    await executeCommand(installCommand, installArgs, {
+      cwd: root,
+      shell: process.platform === "win32",
+    });
+    spinner.succeed("Dependencies installed successfully");
   } catch (error) {
     spinner.fail();
     console.log("");
@@ -173,19 +162,12 @@ export const installDevDependencies = async (
       installArgs = installArgs.concat(devDependencies);
     }
 
-    // * Verify that the directory exists 1st
-    const pathExists = await fs.pathExists(root);
-    if (pathExists) {
-      // * Create a process that installs the dependencies
-      await executeCommand(installCommand, installArgs, {
-        cwd: root,
-        shell: process.platform === "win32",
-      });
-      spinner.succeed("DevDependencies installed successfully");
-    } else {
-      spinner.fail(`Path: ${root} does not exist.`);
-      throw new Error(`Path: ${root} does not exist.`);
-    }
+    // * Create a process that installs the dependencies
+    await executeCommand(installCommand, installArgs, {
+      cwd: root,
+      shell: process.platform === "win32",
+    });
+    spinner.succeed("DevDependencies installed successfully");
   } catch (error) {
     spinner.fail();
     console.log("");

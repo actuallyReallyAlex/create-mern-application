@@ -1,3 +1,5 @@
+// TODO - programatically create images in assets
+
 import * as Sentry from "@sentry/node";
 import chalk from "chalk";
 import commander from "commander";

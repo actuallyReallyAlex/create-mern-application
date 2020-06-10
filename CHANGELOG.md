@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- Check for `pathExists` - [#31](https://github.com/alexlee-dev/create-mern-application/issues/31)
+
 ### Fixed
 
 ## [0.7.0] - 2020-06-10

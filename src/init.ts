@@ -242,7 +242,6 @@ export const buildSourceFiles = async (
     });
 
     // * NEW LINE Replacer
-    // TODO - Use custom replacer not `replace`
     await executeCommand(
       "npx",
       ["replace", "'(\\/\\* NEW LINE \\*\\/)'", "''", "dist", "-r"],

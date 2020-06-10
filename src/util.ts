@@ -76,7 +76,6 @@ export const cleanupError = async (
  * @param replaceToken Regex used to find the values in the template file.
  * @param applicationName Name of application.
  * @param authorName Name of author.
- * TODO - Create a better version of this function - very similar to "replacer", but smaller.
  */
 export const valueReplacer = (
   files: string[],

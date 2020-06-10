@@ -1,6 +1,6 @@
 {
   "name": "create-mern-application",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "A bootstrapper for creating a MERN application.",
   "bin": {
     "create-mern-application": "./index.js"

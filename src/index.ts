@@ -1,11 +1,11 @@
 // TODO - programatically create images in assets [#26]
-// TODO - Use custom replacer not `replace` [#28]
-// TODO - Create a better version of this function - very similar to "replacer", but smaller. [#29]
+// TODO - Ensure 'AUTHOR NAME' gets replaced correctly
 
 import * as Sentry from "@sentry/node";
 import chalk from "chalk";
 import commander from "commander";
 import inquirer from "inquirer";
+import path from "path";
 import updateNotifier from "update-notifier";
 const pkg = require("../package.json");
 

@@ -71,30 +71,104 @@ export const cleanupError = async (
 };
 
 /**
- * Replaces a token in a list of template files with the appropriate values.
- * @param files Array of files to replace values in.
- * @param replaceToken Regex used to find the values in the template file.
- * @param applicationName Name of application.
- * @param authorName Name of author.
+ * Overwrites a file with new content from replace.
+ * @param src Path to file, or directory to replace values in.
+ * @param token What to search for.
+ * @param replacement What to replace the token with.
  */
-export const valueReplacer = (
-  files: string[],
-  replaceToken: any,
-  applicationName: string,
-  authorName: string
-) => {
-  return files.map(async (filePath: string) => {
-    const file = await fs.readFile(filePath, "utf-8");
-    let newFileContent = file.replace(replaceToken, applicationName);
-    if (filePath.includes("menu"))
-      newFileContent = newFileContent.replace(
-        /___AUTHOR NAME___/gm,
-        authorName
-      );
-    await fs.writeFile(filePath, newFileContent, "utf8");
-    return;
+const overwrite = (src: string, token: string | RegExp, replacement: string) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const file = await fs.readFile(src, "utf-8");
+      let newFileContent = file.replace(token, replacement);
+      await fs.writeFile(src, newFileContent, "utf8");
+      resolve();
+    } catch (error) {
+      reject(error);
+    }
   });
-};
+
+/**
+ * Replaces values in a file or directory of files.
+ * @param src Path to file, or directory to replace values in.
+ * @param token What to search for.
+ * @param replacement What to replace the token with.
+ */
+export const replace = (
+  src: string,
+  token: string | RegExp,
+  replacement: string
+) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const stats = await fs.stat(src);
+      // * Check if `src` is a single file or is a directory
+      const isDirectory = stats.isDirectory();
+
+      console.log({ isDirectory });
+
+      if (isDirectory) {
+        // * If directory
+        // * Recursively go through each content and
+        // * If it's a file, add it to the contents list
+        // * If it's a directory, dive into it
+        const files: string[] = [];
+        const directories: string[] = [src];
+
+        let currentDirString = await fs.readdir(src);
+        let currentDirContents = currentDirString.map(
+          (fileName: string) => `${src}/${fileName}`
+        );
+
+        // * Recursively separate into files/directories
+
+        console.log({
+          files,
+          directories,
+          currentDirString,
+          currentDirContents,
+        });
+
+        while (directories.length > 0) {
+          for (let i = 0; i < currentDirContents.length; i++) {
+            const content = currentDirContents[i];
+            console.log({ content });
+            fs.stat(content, (err, stats) => {
+              const isDirectory = stats.isDirectory();
+              if (isDirectory) {
+                directories.push(content);
+              } else {
+                files.push(content);
+              }
+            });
+          }
+        }
+
+        console.log({ files });
+        console.log({ directories });
+
+        // const files = dirContents.map(
+        //   (fileName: string) => `${src}/${fileName}`
+        // );
+        // await Promise.all(
+        //   files.map(async (fileName: string) => {
+        //     console.log(fileName);
+        //     await overwrite(fileName, token, replacement);
+        //     return;
+        //   })
+        // );
+
+        resolve();
+      } else {
+        // * If single file
+        // * Replace all values in file
+        await overwrite(src, token, replacement);
+        resolve();
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
 
 /**
  * Validates the application name according to NPM naming conventions.

@@ -12,7 +12,7 @@ import {
   devDependencies,
   devDependenciesTS,
 } from "./constants";
-import { executeCommand, valueReplacer, generateFilesToCopyArr } from "./util";
+import { executeCommand, generateFilesToCopyArr, replace } from "./util";
 import { FileCopy } from "./types";
 
 /**
@@ -242,14 +242,15 @@ export const buildSourceFiles = async (
     });
 
     // * NEW LINE Replacer
-    await executeCommand(
-      "npx",
-      ["replace", "'(\\/\\* NEW LINE \\*\\/)'", "''", "dist", "-r"],
-      {
-        cwd: root,
-        shell: process.platform === "win32",
-      }
-    );
+    await replace(path.join(root, "dist"), "(\\/\\* NEW LINE \\*\\/)", "");
+    // await executeCommand(
+    //   "npx",
+    //   ["replace", "'(\\/\\* NEW LINE \\*\\/)'", "''", "dist", "-r"],
+    //   {
+    //     cwd: root,
+    //     shell: process.platform === "win32",
+    //   }
+    // );
 
     // * Copy Files
     await Promise.all(
@@ -346,12 +347,10 @@ export const replaceTemplateValues = async (
 
     // * Apply real values to template files
     await Promise.all(
-      valueReplacer(
-        replaceFiles,
-        /___APP NAME___/gm,
-        applicationName,
-        authorName
-      )
+      replaceFiles.map(async (filePath: string) => {
+        await replace(filePath, /___APP NAME___/gm, applicationName);
+        return;
+      })
     );
     spinner.succeed("Values in template files replaced successfully");
   } catch (error) {

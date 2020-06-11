@@ -12,7 +12,7 @@ import {
   devDependencies,
   devDependenciesTS,
 } from "./constants";
-import { executeCommand, valueReplacer, generateFilesToCopyArr } from "./util";
+import { executeCommand, generateFilesToCopyArr, replace } from "./util";
 import { FileCopy } from "./types";
 
 /**
@@ -321,8 +321,7 @@ export const cleanUpDependencies = async (
  */
 export const replaceTemplateValues = async (
   applicationName: string,
-  language: "js" | "ts",
-  authorName: string
+  language: "js" | "ts"
 ): Promise<void> => {
   // * Application Directory
   const root = path.resolve(applicationName);
@@ -346,12 +345,10 @@ export const replaceTemplateValues = async (
 
     // * Apply real values to template files
     await Promise.all(
-      valueReplacer(
-        replaceFiles,
-        /___APP NAME___/gm,
-        applicationName,
-        authorName
-      )
+      replaceFiles.map(async (filePath: string) => {
+        await replace(filePath, /___APP NAME___/gm, applicationName);
+        return;
+      })
     );
     spinner.succeed("Values in template files replaced successfully");
   } catch (error) {

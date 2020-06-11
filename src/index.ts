@@ -1,6 +1,6 @@
 // TODO - programatically create images in assets [#26]
 // TODO - Use custom replacer not `replace` [#28]
-// TODO - Create a better version of this function - very similar to "replacer", but smaller. [#29]
+// TODO - Create ability to use `replace()` on directories recursively
 
 import * as Sentry from "@sentry/node";
 import chalk from "chalk";
@@ -139,7 +139,7 @@ const main = async (): Promise<void> => {
     }
 
     // * Replaces template files placeholder values with real values for the application.
-    await replaceTemplateValues(applicationName, language, authorName);
+    await replaceTemplateValues(applicationName, language);
 
     // * Creates a tsconfig.json file
     if (language === "ts") await createTSConfig(applicationName);

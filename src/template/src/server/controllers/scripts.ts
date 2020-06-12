@@ -1,13 +1,18 @@
 import express, { Router, Request, Response } from "express";
 import path from "path";
 
+/**
+ * Scipts Controller.
+ */
 class ScriptsController {
   public router: Router = express.Router();
 
+  /* NEW LINE */
   constructor() {
     this.initializeRoutes();
   }
 
+  /* NEW LINE */
   public initializeRoutes(): void {
     this.router.get(
       "/scripts/react.js",
@@ -20,6 +25,7 @@ class ScriptsController {
       }
     );
 
+    /* NEW LINE */
     this.router.get(
       "/scripts/react-dom.js",
       async (req: Request, res: Response) => {
@@ -35,4 +41,5 @@ class ScriptsController {
   }
 }
 
+/* NEW LINE */
 export default ScriptsController;

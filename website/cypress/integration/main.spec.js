@@ -11,14 +11,11 @@ context('create-mern-application', () => {
       'contain.text',
       'A bootstrapper for creating a MERN application.',
     );
-    cy.get('body').should('contain.text', '22.9kb gzipped');
     cy.get('body').should('contain.text', 'View Documentation');
   });
 
   it('Should step through demo', () => {
     cy.get('#create-application').click();
-    cy.wait(10000);
-    cy.get('#start-application').click();
     cy.wait(10000);
     cy.get('#view-documentation').should('exist');
   });

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 const webpack = require('webpack');
 const chalk = require('chalk');
 const path = require('path');

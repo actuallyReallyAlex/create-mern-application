@@ -34,7 +34,6 @@ class App {
         if (whitelistDomains.indexOf(origin) !== -1) {
           cb(null, true);
         } else {
-          // eslint-disable-next-line no-console
           console.error(`Sever refused to allow: ${origin}`);
           cb(new Error('Not allowed by CORS'));
         }
@@ -58,9 +57,7 @@ class App {
 
   public listen(): void {
     this.app.listen(this.port, () => {
-      // eslint-disable-next-line no-console
       console.log(`Mode: ${chalk.blueBright(process.env.NODE_ENV)}\n`);
-      // eslint-disable-next-line no-console
       console.log(
         `Server is listening on port: ${chalk.blueBright(this.port)}\n`,
       );

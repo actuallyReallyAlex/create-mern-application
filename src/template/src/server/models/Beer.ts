@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
 
+/**
+ * Beer Model.
+ */
 const beerSchema = new mongoose.Schema(
   {
     abv: {
@@ -26,12 +29,16 @@ const beerSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+/* NEW LINE */
 function applicationToJSON(this: any): void {
   return this.toObject();
 }
 
+/* NEW LINE */
 beerSchema.methods.toJSON = applicationToJSON;
 
+/* NEW LINE */
 const Beer = mongoose.model("Beer", beerSchema);
 
+/* NEW LINE */
 export default Beer;

@@ -1,15 +1,20 @@
 import chalk from "chalk";
 
+/* NEW LINE */
 import App from "./app";
 import AssetsController from "./controllers/assets";
 import BeerController from "./controllers/beer";
 import ScriptsController from "./controllers/scripts";
 import { checkIfMongoDBIsRunning } from "./util";
 
+/**
+ * Main Server Application.
+ */
 const main = async (): Promise<void> => {
   try {
     const isRunning = await checkIfMongoDBIsRunning();
 
+    /* NEW LINE */
     if (!isRunning) {
       console.error(chalk.red("ERROR: Could not connect to MongoDB URL"));
       console.log("");
@@ -27,17 +32,21 @@ const main = async (): Promise<void> => {
       return process.exit(1);
     }
 
+    /* NEW LINE */
     if (!process.env.PORT) throw new Error("No PORT");
 
+    /* NEW LINE */
     const app = new App(
       [new AssetsController(), new BeerController(), new ScriptsController()],
       process.env.PORT
     );
 
+    /* NEW LINE */
     app.listen();
   } catch (error) {
     console.error(error);
   }
 };
 
+/* NEW LINE */
 main();

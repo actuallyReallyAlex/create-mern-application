@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import createApplication from '../demo/createApplication';
 import entry from '../demo/entry';
-import startApplication from '../demo/startApplication';
 
 import { buttonContainerHeights } from '../constants';
 import useMedia from '../hooks/useMedia';
@@ -15,7 +14,6 @@ const Demo: React.SFC<{}> = () => {
   );
   const [currentDemo, setCurrentDemo] = React.useState('entry');
   const [applicationCreated, setApplicationCreated] = React.useState(false);
-  const [applicationStarted, setApplicationStarted] = React.useState(false);
 
   React.useEffect(() => {
     entry();
@@ -40,19 +38,7 @@ const Demo: React.SFC<{}> = () => {
           </button>
         )}
 
-        {applicationCreated && currentDemo === 'create' && (
-          <button
-            className="button blue-bg"
-            id="start-application"
-            onClick={(): void =>
-              startApplication({ setApplicationStarted, setCurrentDemo })
-            }
-          >
-            Start Application
-          </button>
-        )}
-
-        {applicationStarted && (
+        {applicationCreated && (
           <button
             className="button blue-bg"
             id="view-documentation"

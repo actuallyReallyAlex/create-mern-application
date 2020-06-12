@@ -1,7 +1,9 @@
 import { starterBeers } from "../constants";
 import { Beer } from "../types";
 
-/* NEW LINE */
+/**
+ * Initialize DB with Starter Beers if no Beers present.
+ */
 export const initializeStarterBeers = async (): Promise<void> => {
   try {
     starterBeers.forEach(async ({ abv, brewer, description, name, type }) => {
@@ -26,7 +28,9 @@ export const initializeStarterBeers = async (): Promise<void> => {
   }
 };
 
-/* NEW LINE */
+/**
+ * Gets Beers from the database.
+ */
 export const getBeers = async (): Promise<Beer[] | []> => {
   try {
     const response = await fetch("/beers");
@@ -38,7 +42,10 @@ export const getBeers = async (): Promise<Beer[] | []> => {
   }
 };
 
-/* NEW LINE */
+/**
+ * Adds a Beer to the database.
+ * @param beer Beer to add.
+ */
 export const addBeer = async (beer: {
   abv: number;
   brewer: string;
@@ -59,7 +66,10 @@ export const addBeer = async (beer: {
   }
 };
 
-/* NEW LINE */
+/**
+ * Removes a Beer from the database.
+ * @param id ID of Beer to remove.
+ */
 export const deleteBeer = async (id: string): Promise<void> => {
   try {
     await fetch(`/beer/${id}`, {
@@ -73,7 +83,10 @@ export const deleteBeer = async (id: string): Promise<void> => {
   }
 };
 
-/* NEW LINE */
+/**
+ * Edits a Beer in the database.
+ * @param beer Beer to edit.
+ */
 export const editBeer = async (beer: {
   id: string;
   abv: number;

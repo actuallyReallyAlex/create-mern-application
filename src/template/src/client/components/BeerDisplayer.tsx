@@ -8,7 +8,9 @@ export interface BeerDisplayerProps {
   setModalContent: Function;
 }
 
-/* NEW LINE */
+/**
+ * Displays Beers in the database.
+ */
 const BeerDisplayer: React.SFC<BeerDisplayerProps> = ({
   beers,
   setCurrentBeer,

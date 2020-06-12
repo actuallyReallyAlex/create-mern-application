@@ -1,6 +1,7 @@
 import { Request, Router } from "express";
 import { Document } from "mongoose";
 
+/* NEW LINE */
 export interface BeerDocument extends Document {
   _id: string;
   abv: number;
@@ -10,6 +11,7 @@ export interface BeerDocument extends Document {
   type: string;
 }
 
+/* NEW LINE */
 export interface BeerEditRequest extends Request {
   body: {
     abv: number;
@@ -20,6 +22,7 @@ export interface BeerEditRequest extends Request {
   };
 }
 
+/* NEW LINE */
 export type Controller = {
   router: Router;
 };

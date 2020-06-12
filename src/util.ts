@@ -59,15 +59,9 @@ export const cleanupError = async (
     // * Application Directory
     const root = path.resolve(applicationName);
 
-    const rootExists = await fs.pathExists(root);
-
-    if (rootExists) {
-      await executeCommand("rimraf", [root], {
-        shell: process.platform === "win32",
-      });
-    }
+    await fs.remove(root);
   } catch (error) {
-    throw new Error(error);
+    console.error(error);
   }
 };
 

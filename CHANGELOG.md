@@ -11,9 +11,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Topmost catch block will not throw another new Error
+
 ### Removed
 
 ### Fixed
+
+- `cleanupError()` causing error - [#38](https://github.com/alexlee-dev/create-mern-application/issues/38)
 
 ## [0.10.0] - 2020-06-12
 

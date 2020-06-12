@@ -159,7 +159,7 @@ const main = async (): Promise<void> => {
     // * Ensure application directory is removed
     await cleanupError(applicationName);
     console.error(error);
-    throw new Error(error);
+    process.exit(1);
   }
 };
 

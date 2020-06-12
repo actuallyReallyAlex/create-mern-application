@@ -16,8 +16,16 @@ export const dependencies = [
  * These dev dependencies are for JavaScript projects.
  */
 export const devDependencies = [
-  "@babel/core",
+  "@types/react",
+  "@types/react-dom",
+  "@types/cors",
+  "@types/express",
+  "@types/mongoose",
+  "@types/morgan",
+  "@types/node-fetch",
   "@babel/cli",
+  "@babel/core",
+  "@babel/plugin-proposal-class-properties",
   "@babel/plugin-transform-runtime",
   "@babel/preset-env",
   "@babel/preset-react",
@@ -37,13 +45,6 @@ export const devDependencies = [
   "webpack",
   "webpack-cli",
   "webpack-dev-server",
-  "@types/react",
-  "@types/react-dom",
-  "@types/cors",
-  "@types/express",
-  "@types/mongoose",
-  "@types/morgan",
-  "@types/node-fetch",
 ];
 
 /**

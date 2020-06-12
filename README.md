@@ -83,6 +83,28 @@ Please be sure to have your MongoDB instance running prior to starting your appl
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
+### Dependencies
+
+- [@sentry/node](https://sentry.io/welcome/) - Sentry is cross-platform application monitoring, with a focus on error reporting.
+- [chalk](https://github.com/chalk/chalk) - Terminal string styling done right.
+- [commander](https://github.com/tj/commander.js) - Node.js command-line interfaces made easy.
+- [fs-extra](https://github.com/jprichardson/node-fs-extra) - Node.js: extra methods for the fs object like copy(), remove(), mkdirs().
+- [inquirer](https://github.com/SBoudrias/Inquirer.js) - A collection of common interactive command line user interfaces.
+- [ora](https://github.com/sindresorhus/ora) - Elegant terminal spinner.
+- [recursive-readdir](https://github.com/jergason/recursive-readdir) - Node.js module to list all files in a directory or any subdirectories.
+- [semver](https://github.com/npm/node-semver) - The semver parser for node (the one npm uses).
+- [update-notifier](https://github.com/yeoman/update-notifier) - Update notifications for your CLI app.
+- [validate-npm-package-name](https://github.com/npm/validate-npm-package-name) - Is the given string an acceptable npm package name?
+
+### DevDependencies
+
+- [@babel/plugin-transform-runtime](https://www.npmjs.com/package/@babel/plugin-transform-runtime) - 🐠 Babel is a compiler for writing next generation JavaScript.
+- [@babel/preset-env](https://www.npmjs.com/package/@babel/preset-env) - 🐠 Babel is a compiler for writing next generation JavaScript.
+- [copyfiles](https://github.com/calvinmetcalf/copyfiles) - Copy files on the command line.
+- [jest](https://jestjs.io/) - Delightful JavaScript Testing.
+- [prettier](https://prettier.io/) - Prettier is an opinionated code formatter.
+- [typescript](https://www.typescriptlang.org/) - A typed superset of JavaScript that compiles to plain JavaScript.
+
 ## ✍️ Authors <a name = "authors"></a>
 
 - [Alex Lee](https://github.com/alexlee-dev) - Application Developer

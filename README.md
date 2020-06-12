@@ -20,6 +20,8 @@
     <br> 
 </p>
 
+![Example of create-mern-application running](gifs/example.gif)
+
 ## 📝 Table of Contents
 
 - [About](#about)
@@ -73,7 +75,7 @@ Want support for an additional language? Feel free to open a [new issue](https:/
 
 You can choose to use the application in an interactive mode by passing the flag `--interactive`.
 
-This mode grants you several additinoal options.
+This mode grants you several additional options.
 
 ### Starting the Application
 

@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Comments in template files - [#22](https://github.com/alexlee-dev/create-mern-application/issues/22)
 - README `Built With` section - [#9](https://github.com/alexlee-dev/create-mern-application/issues/9)
+- GIF - [#33](https://github.com/alexlee-dev/create-mern-application/issues/33)
 
 ### Changed
 

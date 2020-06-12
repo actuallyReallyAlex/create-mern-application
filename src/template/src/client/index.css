@@ -1,3 +1,4 @@
+/* Application */
 body {
   font-family: "Roboto", "Helvetica Neue", sans-serif;
   margin: 0;
@@ -13,9 +14,13 @@ body {
   padding: 25px;
 }
 
+/* Logo */
+
 #logo {
   height: 300px;
 }
+
+/* Beer Displayer */
 
 #beer-table-heading {
   align-items: center;
@@ -66,6 +71,8 @@ tbody tr:nth-child(even) {
   background-color: #e9ecef;
 }
 
+/* Modal */
+
 .shade {
   background-color: rgba(0, 0, 0, 0.75);
   bottom: 0;
@@ -99,6 +106,8 @@ tbody tr:nth-child(even) {
   display: none;
 }
 
+/* Forms */
+
 .form {
   display: flex;
   flex-direction: column;
@@ -117,7 +126,7 @@ tbody tr:nth-child(even) {
   margin-top: 25px;
 }
 
-/* Spinner */
+/* Loading Indicator */
 
 .orbit-spinner,
 .orbit-spinner * {

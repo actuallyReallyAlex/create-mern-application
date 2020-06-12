@@ -11,7 +11,9 @@ export interface DeleteBeerForm {
   setModalContent: Function;
 }
 
-/* NEW LINE */
+/**
+ * Form to Delete a Beer.
+ */
 const DeleteBeerForm: React.SFC<DeleteBeerForm> = ({
   currentBeer,
   refreshBeers,

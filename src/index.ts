@@ -1,4 +1,3 @@
-// TODO - programatically create images in assets [#26]
 // TODO - Is there a place for AUTHOR NAME?
 
 import * as Sentry from "@sentry/node";
@@ -34,6 +33,9 @@ import {
   verifyNodeVersion,
 } from "./util";
 
+/**
+ * create-mern-application
+ */
 const main = async (): Promise<void> => {
   let applicationName;
   let authorName = "YOUR NAME";
@@ -146,6 +148,7 @@ const main = async (): Promise<void> => {
     // * Displays a success message to the user
     displaySuccessMessage(applicationName);
 
+    // * Notify user to update if need be
     updateNotifier({
       pkg: {
         name: "create-mern-application",
@@ -153,6 +156,7 @@ const main = async (): Promise<void> => {
       },
     }).notify();
   } catch (error) {
+    // * Ensure application directory is removed
     await cleanupError(applicationName);
     console.error(error);
     throw new Error(error);

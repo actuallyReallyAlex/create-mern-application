@@ -1,3 +1,6 @@
+/**
+ * Starter Beers.
+ */
 export const starterBeers = [
   {
     abv: 7.0,

@@ -74,6 +74,9 @@ export const devDependenciesTS = [
   "webpack-dev-server",
 ];
 
+/**
+ * Files needed for the Build process, to be copied.
+ */
 export const buildFilesToCopy = [
   {
     src: "src/server/assets",
@@ -89,6 +92,9 @@ export const buildFilesToCopy = [
   },
 ];
 
+/**
+ * Files to remove after the Build process completes.
+ */
 export const buildFilesToRemove = [
   "dist",
   "index.d.ts",
@@ -97,6 +103,9 @@ export const buildFilesToRemove = [
   "/src/server/types.js",
 ];
 
+/**
+ * Dependencies to remove from the application after compilation is completed.
+ */
 export const dependenciesToCleanup = [
   "@types/cors",
   "@types/express",

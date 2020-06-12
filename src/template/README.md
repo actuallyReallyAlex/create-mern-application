@@ -7,7 +7,7 @@
 
 ---
 
-<p align="center"> This application was bootstrapped with <b>create-mern-application</b>
+<p align="center">This application was bootstrapped with <b>create-mern-application</b>
     <br> 
 </p>
 
@@ -33,4 +33,4 @@ Please be sure to start your MongoDB instance prior to starting your application
 
 ## ✍️ Authors <a name = "authors"></a>
 
-- [Alex Lee](https://github.com/alexlee-dev) - Application Developer
+- [YOUR NAME](YOUR WEBSITE URL) - YOUR TITLE

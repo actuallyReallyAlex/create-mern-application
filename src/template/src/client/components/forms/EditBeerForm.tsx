@@ -12,7 +12,9 @@ export interface EditBeerFormProps {
   setModalContent: Function;
 }
 
-/* NEW LINE */
+/**
+ * Form to Edit a Beer.
+ */
 const EditBeerForm: React.SFC<EditBeerFormProps> = ({
   currentBeer,
   refreshBeers,

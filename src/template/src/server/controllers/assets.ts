@@ -1,9 +1,13 @@
 import express, { Router, Request, Response } from "express";
 import path from "path";
 
+/**
+ * Assets Controller.
+ */
 class AssetsController {
   public router: Router = express.Router();
 
+  /* NEW LINE */
   static assetList: string[] = [
     "android-chrome-192x192.png",
     "android-chrome-512x512.png",
@@ -17,10 +21,12 @@ class AssetsController {
     "site.webmanifest",
   ];
 
+  /* NEW LINE */
   constructor() {
     this.initializeRoutes();
   }
 
+  /* NEW LINE */
   public initializeRoutes(): void {
     AssetsController.assetList.forEach((asset: string) => {
       this.router.get(
@@ -33,4 +39,5 @@ class AssetsController {
   }
 }
 
+/* NEW LINE */
 export default AssetsController;

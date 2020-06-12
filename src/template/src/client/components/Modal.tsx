@@ -15,7 +15,9 @@ export interface ModalProps {
   setModalContent: Function;
 }
 
-/* NEW LINE */
+/**
+ * Displays Modal.
+ */
 const Modal: React.SFC<ModalProps> = ({
   currentBeer,
   isModalOpen,

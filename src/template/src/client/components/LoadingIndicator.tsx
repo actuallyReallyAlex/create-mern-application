@@ -4,7 +4,9 @@ export interface LoadingIndicatorProps {
   isLoading: boolean;
 }
 
-/* NEW LINE */
+/**
+ * Displays Loading Indicator.
+ */
 const LoadingIndicator: React.SFC<LoadingIndicatorProps> = ({ isLoading }) => {
   return (
     <>

@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `npx` instructions to README - [#39](https://github.com/alexlee-dev/create-mern-application/issues/39)
+- Author Name - [#37](https://github.com/alexlee-dev/create-mern-application/issues/37)
 
 ### Changed
 

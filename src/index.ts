@@ -1,5 +1,3 @@
-// TODO - Is there a place for AUTHOR NAME?
-
 import * as Sentry from "@sentry/node";
 import chalk from "chalk";
 import commander from "commander";
@@ -108,8 +106,7 @@ const main = async (): Promise<void> => {
         {
           type: "input",
           name: "name",
-          message:
-            "Please input your name (used for the 'About' screen, but not required):",
+          message: "Please input your name (optional):",
         },
       ]);
       const name: string = nameAnswer.name;
@@ -140,7 +137,7 @@ const main = async (): Promise<void> => {
     }
 
     // * Replaces template files placeholder values with real values for the application.
-    await replaceTemplateValues(applicationName, language);
+    await replaceTemplateValues(applicationName, language, authorName);
 
     // * Creates a tsconfig.json file
     if (language === "ts") await createTSConfig(applicationName);

@@ -69,4 +69,4 @@ Please be sure to start your MongoDB instance prior to starting your application
 
 ## ✍️ Authors <a name = "authors"></a>
 
-- [YOUR NAME](YOUR WEBSITE URL) - YOUR TITLE
+- [___AUTHOR NAME___](YOUR WEBSITE URL) - YOUR TITLE

@@ -1,6 +1,5 @@
 // TODO - programatically create images in assets [#26]
-// TODO - Use custom replacer not `replace` [#28]
-// TODO - Create ability to use `replace()` on directories recursively
+// TODO - Is there a place for AUTHOR NAME?
 
 import * as Sentry from "@sentry/node";
 import chalk from "chalk";

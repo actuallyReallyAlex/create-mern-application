@@ -2,6 +2,7 @@ import chalk from "chalk";
 import { spawn } from "child_process";
 import fs from "fs-extra";
 import path from "path";
+import recursive from "recursive-readdir";
 import semver from "semver";
 import validateProjectName from "validate-npm-package-name";
 
@@ -105,11 +106,17 @@ export const replace = (
       // * Check if `src` is a single file or is a directory
       const isDirectory = stats.isDirectory();
 
-      console.log({ isDirectory });
-
       if (isDirectory) {
         // * If directory
-        reject(`Unable to perform action on directory - ${src}`);
+        // * Recursively get a list of files
+        const files = await recursive(src);
+        await Promise.all(
+          files.map(async (fileName: string) => {
+            await overwrite(fileName, token, replacement);
+            return;
+          })
+        );
+        resolve();
       } else {
         // * If single file
         // * Replace all values in file

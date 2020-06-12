@@ -242,14 +242,7 @@ export const buildSourceFiles = async (
     });
 
     // * NEW LINE Replacer
-    await executeCommand(
-      "npx",
-      ["replace", "'(\\/\\* NEW LINE \\*\\/)'", "''", "dist", "-r"],
-      {
-        cwd: root,
-        shell: process.platform === "win32",
-      }
-    );
+    await replace(path.join(root, "dist"), /(\/\* NEW LINE \*\/)/gm, "");
 
     // * Copy Files
     await Promise.all(

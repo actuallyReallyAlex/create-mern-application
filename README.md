@@ -57,11 +57,19 @@ I've made a lot of MERN applications lately, and I want to make that process eas
 
 ### Installing
 
+You can either use `npx` , or install the package globally on your machine.
+
+#### NPX
+
+`npx create-mern-application cool-app-name`
+
+#### Global Install
+
 `npm install -g create-mern-application`
 
 ## 🎈 Usage <a name="usage"></a>
 
-`create-mern-application cool-app-name`
+`npx create-mern-application cool-app-name`
 
 ### Changing the Source Language
 

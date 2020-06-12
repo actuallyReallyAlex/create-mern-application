@@ -13,7 +13,7 @@ const pkg = require("../package.json");
 Sentry.init({
   dsn:
     "https://44111e696abc456c959aef6dfc97f6a7@o202486.ingest.sentry.io/5262339",
-  release: "0.9.0",
+  release: "0.10.0",
 });
 
 import {
@@ -49,7 +49,7 @@ const main = async (): Promise<void> => {
      * The program that parses the initial user input
      */
     const program = new commander.Command("create-mern-application")
-      .version("0.9.0")
+      .version("0.10.0")
       .arguments("<application-name>")
       .usage(`${chalk.blueBright("<application-name>")} [options]`)
       .action((name) => {

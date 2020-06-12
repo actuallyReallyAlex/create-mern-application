@@ -113,6 +113,8 @@ Please be sure to have your MongoDB instance running prior to starting your appl
 
 ## 🚀 Additional Features to Be Added
 
+- [Add](https://github.com/alexlee-dev/create-mern-application/issues/new) an issue for a feature you'd like to see!
+
 ## 🎉 Acknowledgements <a name = "acknowledgement"></a>
 
 - Some inspiration from the developers behind [create-react-app](https://github.com/facebook/create-react-app).

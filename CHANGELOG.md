@@ -12,6 +12,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Enhanced Testing - [#27](https://github.com/alexlee-dev/create-mern-application/issues/27)
+- Rewrote `valueReplacer()` to be more robust - [#29](https://github.com/alexlee-dev/create-mern-application/issues/29)
+- Use own `replace()` instead of relying on `replace` dependency - [#28](https://github.com/alexlee-dev/create-mern-application/issues/28)
 
 ### Removed
 

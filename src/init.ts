@@ -1,7 +1,3 @@
-// TODO - programatically create webpack
-// TODO - programatically create images in assets
-// TODO - Test ability to build create-mern-application as well as building template application
-// TODO - Update Test to use commands and be more robust
 import chalk from "chalk";
 import fs from "fs-extra";
 import ora from "ora";
@@ -16,7 +12,7 @@ import {
   devDependencies,
   devDependenciesTS,
 } from "./constants";
-import { executeCommand, valueReplacer, generateFilesToCopyArr } from "./util";
+import { executeCommand, generateFilesToCopyArr, replace } from "./util";
 import { FileCopy } from "./types";
 
 /**
@@ -127,19 +123,12 @@ export const installDependencies = async (
     const installCommand = "npm";
     let installArgs = ["install", "--save"];
     installArgs = installArgs.concat(dependencies);
-    // * Verify that the directory exists 1st
-    const pathExists = await fs.pathExists(root);
-    if (pathExists) {
-      // * Create a process that installs the dependencies
-      await executeCommand(installCommand, installArgs, {
-        cwd: root,
-        shell: process.platform === "win32",
-      });
-      spinner.succeed("Dependencies installed successfully");
-    } else {
-      spinner.fail(`Path: ${root} does not exist.`);
-      throw new Error(`Path: ${root} does not exist.`);
-    }
+    // * Create a process that installs the dependencies
+    await executeCommand(installCommand, installArgs, {
+      cwd: root,
+      shell: process.platform === "win32",
+    });
+    spinner.succeed("Dependencies installed successfully");
   } catch (error) {
     spinner.fail();
     console.log("");
@@ -173,19 +162,12 @@ export const installDevDependencies = async (
       installArgs = installArgs.concat(devDependencies);
     }
 
-    // * Verify that the directory exists 1st
-    const pathExists = await fs.pathExists(root);
-    if (pathExists) {
-      // * Create a process that installs the dependencies
-      await executeCommand(installCommand, installArgs, {
-        cwd: root,
-        shell: process.platform === "win32",
-      });
-      spinner.succeed("DevDependencies installed successfully");
-    } else {
-      spinner.fail(`Path: ${root} does not exist.`);
-      throw new Error(`Path: ${root} does not exist.`);
-    }
+    // * Create a process that installs the dependencies
+    await executeCommand(installCommand, installArgs, {
+      cwd: root,
+      shell: process.platform === "win32",
+    });
+    spinner.succeed("DevDependencies installed successfully");
   } catch (error) {
     spinner.fail();
     console.log("");
@@ -260,15 +242,7 @@ export const buildSourceFiles = async (
     });
 
     // * NEW LINE Replacer
-    // TODO - Use custom replacer not `replace`
-    await executeCommand(
-      "npx",
-      ["replace", "'(\\/\\* NEW LINE \\*\\/)'", "''", "dist", "-r"],
-      {
-        cwd: root,
-        shell: process.platform === "win32",
-      }
-    );
+    await replace(path.join(root, "dist"), /(\/\* NEW LINE \*\/)/gm, "");
 
     // * Copy Files
     await Promise.all(
@@ -340,8 +314,7 @@ export const cleanUpDependencies = async (
  */
 export const replaceTemplateValues = async (
   applicationName: string,
-  language: "js" | "ts",
-  authorName: string
+  language: "js" | "ts"
 ): Promise<void> => {
   // * Application Directory
   const root = path.resolve(applicationName);
@@ -365,12 +338,10 @@ export const replaceTemplateValues = async (
 
     // * Apply real values to template files
     await Promise.all(
-      valueReplacer(
-        replaceFiles,
-        /___APP NAME___/gm,
-        applicationName,
-        authorName
-      )
+      replaceFiles.map(async (filePath: string) => {
+        await replace(filePath, /___APP NAME___/gm, applicationName);
+        return;
+      })
     );
     spinner.succeed("Values in template files replaced successfully");
   } catch (error) {

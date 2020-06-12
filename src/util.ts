@@ -2,6 +2,7 @@ import chalk from "chalk";
 import { spawn } from "child_process";
 import fs from "fs-extra";
 import path from "path";
+import recursive from "recursive-readdir";
 import semver from "semver";
 import validateProjectName from "validate-npm-package-name";
 
@@ -23,13 +24,8 @@ export const executeCommand = async (
   new Promise((resolve, reject) => {
     const cp = spawn(command, args, options);
     if (debug) {
-      cp.stdout.on("data", (data) => {
-        console.log(`stdout: ${data}`);
-      });
-
-      cp.stderr.on("data", (data) => {
-        console.error(`stderr: ${data}`);
-      });
+      cp.stdout.on("data", (data) => console.log(`stdout: ${data}`));
+      cp.stderr.on("data", (data) => console.log(`stderr: ${data}`));
     }
 
     cp.on("error", (err: Error) => {
@@ -45,9 +41,7 @@ export const executeCommand = async (
       }
       resolve();
     });
-    cp.on("message", (message) => {
-      console.log({ message });
-    });
+    cp.on("message", (message) => console.log({ message }));
   });
 
 /**
@@ -78,31 +72,61 @@ export const cleanupError = async (
 };
 
 /**
- * Replaces a token in a list of template files with the appropriate values.
- * @param files Array of files to replace values in.
- * @param replaceToken Regex used to find the values in the template file.
- * @param applicationName Name of application.
- * @param authorName Name of author.
- * TODO - Create a better version of this function - very similar to "replacer", but smaller.
+ * Overwrites a file with new content from replace.
+ * @param src Path to file, or directory to replace values in.
+ * @param token What to search for.
+ * @param replacement What to replace the token with.
  */
-export const valueReplacer = (
-  files: string[],
-  replaceToken: any,
-  applicationName: string,
-  authorName: string
-) => {
-  return files.map(async (filePath: string) => {
-    const file = await fs.readFile(filePath, "utf-8");
-    let newFileContent = file.replace(replaceToken, applicationName);
-    if (filePath.includes("menu"))
-      newFileContent = newFileContent.replace(
-        /___AUTHOR NAME___/gm,
-        authorName
-      );
-    await fs.writeFile(filePath, newFileContent, "utf8");
-    return;
+const overwrite = (src: string, token: string | RegExp, replacement: string) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const file = await fs.readFile(src, "utf-8");
+      let newFileContent = file.replace(token, replacement);
+      await fs.writeFile(src, newFileContent, "utf8");
+      resolve();
+    } catch (error) {
+      reject(error);
+    }
   });
-};
+
+/**
+ * Replaces values in a file or directory of files.
+ * @param src Path to file, or directory to replace values in.
+ * @param token What to search for.
+ * @param replacement What to replace the token with.
+ */
+export const replace = (
+  src: string,
+  token: string | RegExp,
+  replacement: string
+) =>
+  new Promise(async (resolve, reject) => {
+    try {
+      const stats = await fs.stat(src);
+      // * Check if `src` is a single file or is a directory
+      const isDirectory = stats.isDirectory();
+
+      if (isDirectory) {
+        // * If directory
+        // * Recursively get a list of files
+        const files = await recursive(src);
+        await Promise.all(
+          files.map(async (fileName: string) => {
+            await overwrite(fileName, token, replacement);
+            return;
+          })
+        );
+        resolve();
+      } else {
+        // * If single file
+        // * Replace all values in file
+        await overwrite(src, token, replacement);
+        resolve();
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
 
 /**
  * Validates the application name according to NPM naming conventions.

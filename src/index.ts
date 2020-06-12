@@ -1,3 +1,6 @@
+// TODO - programatically create images in assets [#26]
+// TODO - Is there a place for AUTHOR NAME?
+
 import * as Sentry from "@sentry/node";
 import chalk from "chalk";
 import commander from "commander";
@@ -11,7 +14,7 @@ const pkg = require("../package.json");
 Sentry.init({
   dsn:
     "https://44111e696abc456c959aef6dfc97f6a7@o202486.ingest.sentry.io/5262339",
-  release: "0.7.0",
+  release: "0.8.0",
 });
 
 import {
@@ -44,7 +47,7 @@ const main = async (): Promise<void> => {
      * The program that parses the initial user input
      */
     const program = new commander.Command("create-mern-application")
-      .version("0.7.0")
+      .version("0.8.0")
       .arguments("<application-name>")
       .usage(`${chalk.blueBright("<application-name>")} [options]`)
       .action((name) => {
@@ -135,7 +138,7 @@ const main = async (): Promise<void> => {
     }
 
     // * Replaces template files placeholder values with real values for the application.
-    await replaceTemplateValues(applicationName, language, authorName);
+    await replaceTemplateValues(applicationName, language);
 
     // * Creates a tsconfig.json file
     if (language === "ts") await createTSConfig(applicationName);

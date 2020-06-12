@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.8.0] - 2020-06-11
+
+### 🧪 Good Testing
+
+### Added
+
+### Changed
+
+- Enhanced Testing - [#27](https://github.com/alexlee-dev/create-mern-application/issues/27)
+- Rewrote `valueReplacer()` to be more robust - [#29](https://github.com/alexlee-dev/create-mern-application/issues/29)
+- Use own `replace()` instead of relying on `replace` dependency - [#28](https://github.com/alexlee-dev/create-mern-application/issues/28)
+
+### Removed
+
+- Check for `pathExists` - [#31](https://github.com/alexlee-dev/create-mern-application/issues/31)
+
+### Fixed
+
 ## [0.7.0] - 2020-06-10
 
 ### 🏗️ Build JS from TS

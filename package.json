@@ -30,7 +30,7 @@
   "bugs": {
     "url": "https://github.com/alexlee-dev/create-mern-application/issues"
   },
-  "homepage": "https://github.com/alexlee-dev/create-mern-application#readme",
+  "homepage": "https://create-mern-application.herokuapp.com/",
   "devDependencies": {
     "@babel/plugin-transform-runtime": "^7.10.1",
     "@babel/preset-env": "^7.10.2",

@@ -313,7 +313,8 @@ export const cleanUpDependencies = async (
  */
 export const replaceTemplateValues = async (
   applicationName: string,
-  language: "js" | "ts"
+  language: "js" | "ts",
+  authorName: string
 ): Promise<void> => {
   // * Application Directory
   const root = path.resolve(applicationName);
@@ -339,6 +340,7 @@ export const replaceTemplateValues = async (
     await Promise.all(
       replaceFiles.map(async (filePath: string) => {
         await replace(filePath, /___APP NAME___/gm, applicationName);
+        await replace(filePath, /___AUTHOR NAME___/gm, authorName);
         return;
       })
     );

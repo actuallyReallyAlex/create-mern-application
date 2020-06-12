@@ -1,5 +1,3 @@
-// TODO - Is there a place for AUTHOR NAME?
-
 import * as Sentry from "@sentry/node";
 import chalk from "chalk";
 import commander from "commander";
@@ -13,7 +11,7 @@ const pkg = require("../package.json");
 Sentry.init({
   dsn:
     "https://44111e696abc456c959aef6dfc97f6a7@o202486.ingest.sentry.io/5262339",
-  release: "0.10.0",
+  release: "0.11.0",
 });
 
 import {
@@ -49,7 +47,7 @@ const main = async (): Promise<void> => {
      * The program that parses the initial user input
      */
     const program = new commander.Command("create-mern-application")
-      .version("0.10.0")
+      .version("0.11.0")
       .arguments("<application-name>")
       .usage(`${chalk.blueBright("<application-name>")} [options]`)
       .action((name) => {
@@ -78,7 +76,7 @@ const main = async (): Promise<void> => {
       })
       .parse(process.argv);
 
-    // * Very Node Version (>=10.0.0)
+    // * Verify Node Version (>=10.13.0)
     verifyNodeVersion();
 
     // * Application Name must exist, and not consist of illegal characters
@@ -108,8 +106,7 @@ const main = async (): Promise<void> => {
         {
           type: "input",
           name: "name",
-          message:
-            "Please input your name (used for the 'About' screen, but not required):",
+          message: "Please input your name (optional):",
         },
       ]);
       const name: string = nameAnswer.name;
@@ -140,7 +137,7 @@ const main = async (): Promise<void> => {
     }
 
     // * Replaces template files placeholder values with real values for the application.
-    await replaceTemplateValues(applicationName, language);
+    await replaceTemplateValues(applicationName, language, authorName);
 
     // * Creates a tsconfig.json file
     if (language === "ts") await createTSConfig(applicationName);
@@ -159,7 +156,7 @@ const main = async (): Promise<void> => {
     // * Ensure application directory is removed
     await cleanupError(applicationName);
     console.error(error);
-    throw new Error(error);
+    process.exit(1);
   }
 };
 

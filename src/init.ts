@@ -27,7 +27,6 @@ export const createProjectDirectory = async (
   // * Application Directory
   const root = path.resolve(applicationName);
 
-  // ? Needed?
   fs.ensureDirSync(root);
 
   console.log();

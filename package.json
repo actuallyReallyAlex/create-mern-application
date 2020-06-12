@@ -11,11 +11,9 @@
   ],
   "scripts": {
     "build": "rimraf build && tsc && copyfiles -u 1 \"src/template/**/*\" build",
-    "build-template": "rimraf tester && tsc && npm run format-template && npm run whitespace-template",
-    "format-template": "prettier --write \"tester/**/*\"",
+    "format": "prettier --write \"./**/*.{js,jsx,ts,tsx}\"",
     "start": "node build/index.js",
-    "test": "jest",
-    "whitespace-template": "replace '(\\/\\* NEW LINE \\*\\/)' '' tester/**/* -r"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -25,8 +23,7 @@
     "mern",
     "bootstrapper",
     "cli",
-    "tool",
-    "cra"
+    "tool"
   ],
   "author": "Alex Lee (www.alexlee.dev)",
   "license": "MIT",

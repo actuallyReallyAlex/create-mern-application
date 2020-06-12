@@ -46,7 +46,7 @@ I've made a lot of MERN applications lately, and I want to make that process eas
 
 ### Prerequisites
 
-- Node (>= v10.0.0)
+- Node (>= v10.13.0)
 - NPM
 
 ### OS

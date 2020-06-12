@@ -149,12 +149,12 @@ export const validateApplicationName = (applicationName: any) => {
 };
 
 /**
- * Verifies that the application can run. Needs >= Node v10.0.0
+ * Verifies that the application can run. Needs >= Node v10.13.0
  */
 export const verifyNodeVersion = (): void => {
-  if (!semver.satisfies(process.version, ">=10.0.0")) {
+  if (!semver.satisfies(process.version, ">=10.13.0")) {
     console.error(
-      chalk.red(`create-mern-application requires Node v10 or higher.`)
+      chalk.red(`create-mern-application requires Node v10.13.0 or higher.`)
     );
     console.error(chalk.red(`You are running Node ${process.version}.`));
     console.error(chalk.red(`Please update your version of Node.`));

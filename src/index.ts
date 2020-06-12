@@ -76,7 +76,7 @@ const main = async (): Promise<void> => {
       })
       .parse(process.argv);
 
-    // * Very Node Version (>=10.0.0)
+    // * Verify Node Version (>=10.13.0)
     verifyNodeVersion();
 
     // * Application Name must exist, and not consist of illegal characters

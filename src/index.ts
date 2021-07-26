@@ -1,8 +1,9 @@
 import * as Sentry from "@sentry/node";
 import chalk from "chalk";
-import commander from "commander";
+import commander, { Command } from "commander";
 import inquirer from "inquirer";
 import updateNotifier from "update-notifier";
+import { CustomCommand } from './types';
 const pkg = require("../package.json");
 
 /**
@@ -46,7 +47,7 @@ const main = async (): Promise<void> => {
     /**
      * The program that parses the initial user input
      */
-    const program = new commander.Command("create-mern-application")
+    const program: CustomCommand = new commander.Command("create-mern-application")
       .version("0.11.0")
       .arguments("<application-name>")
       .usage(`${chalk.blueBright("<application-name>")} [options]`)

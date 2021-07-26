@@ -72,7 +72,7 @@ export const cleanupError = async (
  * @param replacement What to replace the token with.
  */
 const overwrite = (src: string, token: string | RegExp, replacement: string) =>
-  new Promise(async (resolve, reject) => {
+  new Promise<void>(async (resolve, reject) => {
     try {
       const file = await fs.readFile(src, "utf-8");
       let newFileContent = file.replace(token, replacement);
@@ -94,7 +94,7 @@ export const replace = (
   token: string | RegExp,
   replacement: string
 ) =>
-  new Promise(async (resolve, reject) => {
+  new Promise<void>(async (resolve, reject) => {
     try {
       const stats = await fs.stat(src);
       // * Check if `src` is a single file or is a directory

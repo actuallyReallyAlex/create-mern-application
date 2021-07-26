@@ -3,7 +3,7 @@
   "version": "0.11.0",
   "description": "A bootstrapper for creating a MERN application.",
   "bin": {
-    "create-mern-application": "./index.js"
+    "create-mern-application": "index.js"
   },
   "main": "index.js",
   "files": [
@@ -32,30 +32,30 @@
   },
   "homepage": "https://create-mern-application.herokuapp.com/",
   "devDependencies": {
-    "@babel/plugin-transform-runtime": "^7.10.1",
-    "@babel/preset-env": "^7.10.2",
-    "@types/fs-extra": "^9.0.1",
-    "@types/inquirer": "^6.5.0",
-    "@types/node": "^14.0.13",
+    "@babel/plugin-transform-runtime": "^7.14.5",
+    "@babel/preset-env": "^7.14.8",
+    "@types/fs-extra": "^9.0.12",
+    "@types/inquirer": "^7.3.3",
+    "@types/node": "^16.4.3",
     "@types/recursive-readdir": "^2.2.0",
-    "@types/semver": "^7.2.0",
-    "@types/update-notifier": "^4.1.0",
-    "@types/validate-npm-package-name": "^3.0.0",
-    "copyfiles": "^2.3.0",
-    "jest": "^26.0.1",
-    "prettier": "^2.0.5",
-    "typescript": "^3.9.5"
+    "@types/semver": "^7.3.8",
+    "@types/update-notifier": "^5.0.1",
+    "@types/validate-npm-package-name": "^3.0.3",
+    "copyfiles": "^2.4.1",
+    "jest": "^27.0.6",
+    "prettier": "^2.3.2",
+    "typescript": "^4.3.5"
   },
   "dependencies": {
-    "@sentry/node": "^5.17.0",
-    "chalk": "^4.1.0",
-    "commander": "^5.1.0",
-    "fs-extra": "^9.0.1",
-    "inquirer": "^7.1.0",
-    "ora": "^4.0.4",
+    "@sentry/node": "^6.10.0",
+    "chalk": "^4.1.1",
+    "commander": "^8.0.0",
+    "fs-extra": "^10.0.0",
+    "inquirer": "^8.1.2",
+    "ora": "^5.4.1",
     "recursive-readdir": "^2.2.2",
-    "semver": "^7.3.2",
-    "update-notifier": "^4.1.0",
+    "semver": "^7.3.5",
+    "update-notifier": "^5.1.0",
     "validate-npm-package-name": "^3.0.0"
   },
   "jest": {
